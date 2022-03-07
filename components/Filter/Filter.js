@@ -9,7 +9,7 @@ export default () => {
     const router = useRouter()
 
     const menuItems = countries
-    const menuItems2 = ["Need a support", "Item 2","Item 3"]
+    const menuItems2 = ["Scholarships", "Volunteer mentor", "Volunteer instructor", "Financial Aid"]
 
     const [selectedItem, setSelectedItem] = useState({
         item: null,
@@ -27,9 +27,9 @@ export default () => {
                 onSubmit={(e) => e.preventDefault()}
             >
                 <div className="flex-1">
-                    <lable className="block py-3 text-gray-600">
+                    <label className="block py-3 text-gray-600">
                         Country
-                    </lable>
+                    </label>
                     <SelectMenuSearch
                         menuItems={menuItems}
                         selectedItem={selectedItem}
@@ -37,10 +37,11 @@ export default () => {
                     />
                 </div>
                 <div className="flex-1">
-                    <lable className="block py-3 text-gray-600">
-                        Problem
-                    </lable>
+                    <label className="block py-3 text-gray-600">
+                        Type of aid
+                    </label>
                     <SelectMenu
+                        disabledItem="Type"
                         menuItems={menuItems2}
                         onChange={onchange}
                     />

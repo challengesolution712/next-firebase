@@ -1,4 +1,4 @@
-export default ({ menuItems, onChange, defaultValue }) => {
+export default ({ menuItems, disabledItem, onChange, defaultValue }) => {
     return (
         <div className="relative">
             <svg xmlns="http://www.w3.org/2000/svg" className="absolute top-0 bottom-0 w-6 h-6 my-auto text-gray-400 right-2.5" viewBox="0 0 20 20" fill="currentColor">
@@ -7,6 +7,9 @@ export default ({ menuItems, onChange, defaultValue }) => {
             <select 
                 onChange={onChange}
                 className="w-full p-2.5 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600">
+                    <option selected disabled>
+                        { disabledItem }
+                    </option>
                     {
                         menuItems.map((item, idx) => (
                             <option key={idx}>
