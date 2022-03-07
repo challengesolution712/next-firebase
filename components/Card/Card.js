@@ -3,7 +3,7 @@ import Link from "next/link"
 export default () => {
     return (
         <li className="p-5 bg-white rounded-md shadow-sm">
-            <Link href={"/content/fcxvcxxc"}>
+            <Link href={"/post/title-here-href"}>
                 <a>
                     <div>
                         <div>

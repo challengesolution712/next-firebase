@@ -26,7 +26,7 @@ export default () => {
       // Sticky strick
       const customStyle = ["sticky-nav", "fixed", "border-b"]
       window.onscroll = () => {
-          if (window.scrollY > 80) navRef.current.classList.add(...customStyle)
+          if (window.scrollY > 550) navRef.current.classList.add(...customStyle)
           else navRef.current.classList.remove(...customStyle)
       }
     }, [state])
@@ -34,13 +34,13 @@ export default () => {
 
   return (
       <nav ref={navRef} className="bg-white w-full shadow top-0 z-20">
-          <div className="items-center px-4 max-w-screen-lg mx-auto lg:flex lg:px-8">
+          <div className="items-center px-4 py-2.5 max-w-screen-lg mx-auto lg:flex lg:px-8">
               <div className="flex items-center justify-between py-3 lg:py-4 lg:block">
                     <a href="javascript:void(0)">
                         <img
-                            src="https://www.floatui.com/logo.svg" 
-                            width={120} 
-                            height={50}
+                            src="/logo.svg" 
+                            width={150} 
+                            height={60}
                             alt="Float UI logo"
                         />
                     </a>

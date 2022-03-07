@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { useState } from 'react'
 import Card from '../components/Card/Card'
+import Filter from '../components/Filter/Filter'
 import LoadCardsBtn from '../components/LoadCardsBtn/LoadCardsBtn'
 
 export default function Home() {
@@ -26,9 +27,10 @@ export default function Home() {
             Help a student to continue his studies.
           </h1>
           <p className="mt-3 text-gray-500">
-
+            There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,
           </p>
         </div>
+        <Filter />
         <ul className="mt-12 space-y-6">
           <Card />
           <Card />
