@@ -8,6 +8,7 @@ import Error from "../../components/ValidationMsgs/Error"
 import ErrorAlert from "../../components/Alerts/ErrorAlert"
 import InfoAlert from "../../components/Alerts/InfoAlert"
 import Head from "next/head"
+import Link from "next/link"
 
 const index = () => {
 
@@ -69,7 +70,7 @@ const index = () => {
                 ) : ''
             }
 
-            <div className="mt-24 max-w-2xl mx-auto p-4 bg-white rounded-md shadow sm:p-8">
+            <div className="mt-24 max-w-2xl mx-4 p-4 bg-white rounded-md shadow sm:p-8 sm:mx-auto">
                 <h2 className="text-3xl font-semibold text-center py-4">
                     Sign up
                 </h2>
@@ -116,6 +117,13 @@ const index = () => {
                             }
                             Submit
                         </Button>
+                    </div>
+                    <div className="text-gray-500">
+                        Already have an account? <Link href="/login">
+                            <a className="text-indigo-600">
+                                Log in
+                            </a>
+                        </Link>
                     </div>
                 </form>
             </div>
