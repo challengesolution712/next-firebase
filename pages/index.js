@@ -22,12 +22,12 @@ export default function Home() {
 
       
       <main className="mt-24 mb-5 mx-auto px-4 max-w-screen-lg lg:px-8">
-        <div className="text-center max-w-lg mx-auto">
+        <div className="text-center max-w-xl mx-auto">
           <h1 className="text-4xl font-semibold">
             Help a student to continue his studies.
           </h1>
           <p className="mt-3 text-gray-500">
-            There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,
+            Do you want to create a huge impact in the world? So let's build the future, by helping students to fund their needs, and get the mentorship they need in order to take them to the next level.
           </p>
         </div>
         <Filter />

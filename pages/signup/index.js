@@ -1,4 +1,5 @@
 import Input from "../../components/Input/Input"
+import SelectMenu from '../../components/SelectMenu/SelectMenu'
 import Loading from "../../components/Loading/Loading"
 import { useState } from 'react'
 import Button from "../../components/Button/Button"
@@ -18,9 +19,11 @@ const index = () => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [selecedtItem, setSelecedtItem] = useState("")
 
     const [emailErr, setEmailErr] = useState("")
     const [passErr, setPassErr] = useState("")
+    const [selecedtItemErr, setSelecedtItemErr] = useState("")
 
     const [errMsg, setErrMsg] = useState("")
     const [infoMsg, setInfoMsg] = useState("")
@@ -30,6 +33,7 @@ const index = () => {
 
         setEmailErr("")
         setPassErr("")
+        setSelecedtItemErr("")
 
         // Error messages
         setErrMsg("")
@@ -37,12 +41,15 @@ const index = () => {
         
         if (!validator.validate(email)) setEmailErr("Please enter correct email")
         else if (password.length < 8) setPassErr("Password should not be less than 8 character")
+        else if (!selecedtItem) setSelecedtItemErr("Please select a role")
         else {
             
             // Back end
 
         }
     }
+    
+    const menuItems = ["Student", "Organization"]
     
     return (
         <>
@@ -103,6 +110,19 @@ const index = () => {
                         />
                         <Error>
                             { passErr }
+                        </Error>
+                    </div>
+                    <div>
+                        <label className="text-gray-500 py-3 block">
+                            Role
+                        </label>
+                        <SelectMenu
+                            disabledItem="Select your role"
+                            menuItems={menuItems}
+                            onChange={(e) => setSelecedtItem(e.target.value)}
+                        />
+                        <Error>
+                            { selecedtItemErr }
                         </Error>
                     </div>
                     <div>
