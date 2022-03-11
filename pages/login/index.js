@@ -2,6 +2,7 @@ import Input from "../../components/Input/Input"
 import Loading from "../../components/Loading/Loading"
 import { useState } from 'react'
 import Button from "../../components/Button/Button"
+import validator from "email-validator"
 import Error from "../../components/ValidationMsgs/Error"
 import ErrorAlert from "../../components/Alerts/ErrorAlert"
 import jwt from "jsonwebtoken"
@@ -41,17 +42,17 @@ const index = () => {
         // Error messages
         setErrMsg("")
         setInfoMsg("")
-        
+
         if (!validator.validate(email)) setEmailErr("Please enter correct email")
         else if (password.length < 8) setPassErr("Password should not be less than 8 character")
         else {
-            
+
             // Back end
             logInWithEmailAndPassword(email, password)
 
         }
     }
-    
+
     return (
         <>
             <Head>
@@ -72,39 +73,39 @@ const index = () => {
                 <h2 className="text-3xl font-semibold text-center py-4">
                     log in
                 </h2>
-                <form 
+                <form
                     onSubmit={handleSubmit}
                     className="space-y-3">
                     <div>
                         <label className="text-gray-500 py-3 block">
                             Email
                         </label>
-                        <Input 
+                        <Input
                             className="w-full"
                             type="email"
                             placeholder="Enter your email"
                             onChange={(e) => setEmail(e.target.value)}
                         />
                         <Error>
-                            { emailErr }
+                            {emailErr}
                         </Error>
                     </div>
                     <div>
                         <label className="text-gray-500 py-3 block">
                             Password
                         </label>
-                        <Input 
+                        <Input
                             className="w-full"
                             type="password"
                             placeholder="Enter your password"
                             onChange={(e) => setPassword(e.target.value)}
                         />
                         <Error>
-                            { passErr }
+                            {passErr}
                         </Error>
                     </div>
                     <div>
-                        <Button 
+                        <Button
                             type="submit"
                             className="flex items-center justify-center mt-3 w-full ring-offset-2 ring-indigo-500 focus:ring-2"
                         >
