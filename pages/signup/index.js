@@ -10,6 +10,16 @@ import ErrorAlert from "../../components/Alerts/ErrorAlert"
 import InfoAlert from "../../components/Alerts/InfoAlert"
 import Head from "next/head"
 import Link from "next/link"
+import {
+    auth,
+    db,
+    signInWithGoogle,
+    logInWithEmailAndPassword,
+    registerWithEmailAndPassword,
+    sendPasswordReset,
+    logout,
+} from '../../Firebase/firebase'
+
 
 const index = () => {
 
@@ -52,6 +62,7 @@ const index = () => {
                 token: tokgen.generate(),
                 conirmed: false
             }
+            registerWithEmailAndPassword(email, password, data.role)
 
         }
     }

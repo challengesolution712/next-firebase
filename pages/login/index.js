@@ -8,6 +8,16 @@ import jwt from "jsonwebtoken"
 import jsCookie from "js-cookie"
 import Head from "next/head"
 import Link from "next/link"
+import {
+    auth,
+    db,
+    signInWithGoogle,
+    logInWithEmailAndPassword,
+    registerWithEmailAndPassword,
+    sendPasswordReset,
+    logout,
+} from '../../Firebase/firebase'
+
 
 const index = () => {
 
@@ -37,6 +47,7 @@ const index = () => {
         else {
             
             // Back end
+            logInWithEmailAndPassword(email, password)
 
         }
     }
