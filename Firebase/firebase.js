@@ -19,7 +19,7 @@ import {
 } from "firebase/firestore";
 
 
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(config);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const googleProvider = new GoogleAuthProvider();
