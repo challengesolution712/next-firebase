@@ -8,7 +8,7 @@ export default ({
     <input 
         type={type}
         placeholder={placeholder}
-        defaultvalue={defaultValue}
+        defaultValue={defaultValue}
         required
         onChange={onChange}
         className={`${className} p-3 border rounded-md outline-none focus:border-indigo-600`}

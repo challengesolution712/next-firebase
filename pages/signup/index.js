@@ -63,6 +63,7 @@ const index = () => {
                 conirmed: false
             }
             registerWithEmailAndPassword(email, password, data.role)
+            router.push('/login')
 
         }
     }

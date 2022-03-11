@@ -9,6 +9,7 @@ import jwt from "jsonwebtoken"
 import jsCookie from "js-cookie"
 import Head from "next/head"
 import Link from "next/link"
+import { useRouter } from "next/router"
 import {
     auth,
     db,
@@ -33,6 +34,8 @@ const index = () => {
     const [errMsg, setErrMsg] = useState("")
     const [infoMsg, setInfoMsg] = useState("")
 
+    const router = useRouter()
+
     const handleSubmit = e => {
         e.preventDefault()
 
@@ -48,8 +51,9 @@ const index = () => {
         else {
 
             // Back end
+            setIsLoad(true)
             logInWithEmailAndPassword(email, password)
-
+            router.push('/')
         }
     }
 
