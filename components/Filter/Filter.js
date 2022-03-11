@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import SelectMenu from "../SelectMenu/SelectMenu"
 import SelectMenuSearch from "../SelectMenuSearch/SelectMenuSearch"
 import countries from "../../countries/countries"
-import countriesCities from "../../json/countriesCities.json"
+import countriesCities from "../../countries/countriesCities.json"
 
 export default () => {
 
