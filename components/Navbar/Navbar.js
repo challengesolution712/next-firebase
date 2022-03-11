@@ -10,7 +10,7 @@ export default () => {
   const navigation = [
       { title: "Home", path: "/" },
       { title: "About us", path: "/about" },
-      { title: "Dashboard", path: "/dashboard" },
+      { title: "Dashboard", path: "/dashboard/sdfsgfdddssadgdghf" },
   ]
 
   useEffect(() => {

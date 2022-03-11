@@ -13,7 +13,7 @@ export default ({ msg, onClick }) => {
                             Error
                         </span>
                         <p className="text-red-600 mt-1">
-                            msg
+                            { msg }
                         </p>
                     </div>
                 </div>

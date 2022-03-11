@@ -45,11 +45,18 @@ const index = () => {
         else {
             
             // Back end
+            const data = {
+                email,
+                password,
+                role: selecedtItem,
+                token: tokgen.generate(),
+                conirmed: false
+            }
 
         }
     }
     
-    const menuItems = ["Student", "Organization"]
+    const menuItems = ["Student", "Organization", "Mentor"]
     
     return (
         <>
