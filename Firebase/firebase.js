@@ -14,16 +14,17 @@ import {
     addDoc,
 } from "firebase/firestore";
 
-
 const app = initializeApp(config);
 const auth = getAuth(app);
 const db = getFirestore(app);
+
 
 
 export {
     auth,
     db,
     setDoc,
+    addDoc,
     doc,
     collection
 };

@@ -48,6 +48,8 @@ const index = () => {
         else if (!selecedtItem) setSelecedtItemErr("Please select a role")
         else {
 
+            setIsLoad(true)
+
             // Back end
             const data = {
                 email,
@@ -56,8 +58,11 @@ const index = () => {
                 token: tokgen.generate(),
                 conirmed: false
             }
-            signup(data)
-            
+
+            signup(data).then(res => {
+                if (res.success) setIsLoad(false)
+                
+            })            
             
             // router.push('/login')
 
