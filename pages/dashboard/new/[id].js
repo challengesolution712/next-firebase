@@ -86,7 +86,7 @@ export default () => {
         else if (!validator.validate(email)) setErrosFunc({email: "Please enter correct email"})
         else if (!aid) setErrosFunc({aid: "Please select aid type"})
         else if (!country) setErrosFunc({country: "Please select a country"})
-        else if (detailsWords < 100) setErrosFunc({details: "Details should not be less than 100 words"})
+        else if (detailsWords < 50) setErrosFunc({details: "Details should not be less than 50 words"})
         else {
             
             // Back end
