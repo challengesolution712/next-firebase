@@ -8,6 +8,8 @@ import {
     query,
     getDocs,
     collection,
+    doc,
+    setDoc,
     where,
     addDoc,
 } from "firebase/firestore";
@@ -21,7 +23,8 @@ const db = getFirestore(app);
 export {
     auth,
     db,
-    addDoc,
+    setDoc,
+    doc,
     collection
 };
 

@@ -56,9 +56,9 @@ const index = () => {
                 token: tokgen.generate(),
                 conirmed: false
             }
-            signup(email, password, data.role).then(res => {
-                console.log(res);   
-            })
+            signup(data)
+            
+            
             // router.push('/login')
 
         }
