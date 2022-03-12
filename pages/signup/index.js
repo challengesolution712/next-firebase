@@ -10,20 +10,14 @@ import ErrorAlert from "../../components/Alerts/ErrorAlert"
 import InfoAlert from "../../components/Alerts/InfoAlert"
 import Head from "next/head"
 import Link from "next/link"
-import {
-    auth,
-    db,
-    signInWithGoogle,
-    logInWithEmailAndPassword,
-    registerWithEmailAndPassword,
-    sendPasswordReset,
-    logout,
-} from '../../Firebase/firebase'
+import { useRouter } from "next/router"
+import signup from "../../Firebase/signup"
 
 
 const index = () => {
 
     const tokgen = new TokenGenerator(256, TokenGenerator.BASE62)
+    const router = useRouter()
 
     const [isLoad, setIsLoad] = useState(false)
 
@@ -48,12 +42,12 @@ const index = () => {
         // Error messages
         setErrMsg("")
         setInfoMsg("")
-        
+
         if (!validator.validate(email)) setEmailErr("Please enter correct email")
         else if (password.length < 8) setPassErr("Password should not be less than 8 character")
         else if (!selecedtItem) setSelecedtItemErr("Please select a role")
         else {
-            
+
             // Back end
             const data = {
                 email,
@@ -62,14 +56,16 @@ const index = () => {
                 token: tokgen.generate(),
                 conirmed: false
             }
-            registerWithEmailAndPassword(email, password, data.role)
-            router.push('/login')
+            signup(email, password, data.role).then(res => {
+                console.log(res);   
+            })
+            // router.push('/login')
 
         }
     }
-    
+
     const menuItems = ["Student", "Organization", "Mentor"]
-    
+
     return (
         <>
             <Head>
@@ -100,35 +96,35 @@ const index = () => {
                 <h2 className="text-3xl font-semibold text-center py-4">
                     Sign up
                 </h2>
-                <form 
+                <form
                     onSubmit={handleSubmit}
                     className="space-y-3">
                     <div>
                         <label className="text-gray-500 py-3 block">
                             Email
                         </label>
-                        <Input 
+                        <Input
                             className="w-full"
                             type="email"
                             placeholder="Enter your email"
                             onChange={(e) => setEmail(e.target.value)}
                         />
                         <Error>
-                            { emailErr }
+                            {emailErr}
                         </Error>
                     </div>
                     <div>
                         <label className="text-gray-500 py-3 block">
                             Password
                         </label>
-                        <Input 
+                        <Input
                             className="w-full"
                             type="password"
                             placeholder="Enter your password"
                             onChange={(e) => setPassword(e.target.value)}
                         />
                         <Error>
-                            { passErr }
+                            {passErr}
                         </Error>
                     </div>
                     <div>
@@ -141,11 +137,11 @@ const index = () => {
                             onChange={(e) => setSelecedtItem(e.target.value)}
                         />
                         <Error>
-                            { selecedtItemErr }
+                            {selecedtItemErr}
                         </Error>
                     </div>
                     <div>
-                        <Button 
+                        <Button
                             type="submit"
                             className="flex items-center justify-center mt-3 w-full ring-offset-2 ring-indigo-500 focus:ring-2"
                         >

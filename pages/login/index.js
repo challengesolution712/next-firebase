@@ -10,16 +10,7 @@ import jsCookie from "js-cookie"
 import Head from "next/head"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import {
-    auth,
-    db,
-    signInWithGoogle,
-    logInWithEmailAndPassword,
-    registerWithEmailAndPassword,
-    sendPasswordReset,
-    logout,
-} from '../../Firebase/firebase'
-
+import login from "../../Firebase/login"
 
 const index = () => {
 
@@ -52,8 +43,8 @@ const index = () => {
 
             // Back end
             setIsLoad(true)
-            logInWithEmailAndPassword(email, password)
-            router.push('/')
+            login(email, password)
+            // router.push('/')
         }
     }
 
