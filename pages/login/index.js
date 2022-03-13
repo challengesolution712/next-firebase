@@ -45,6 +45,7 @@ const index = () => {
             setIsLoad(true)
             login({ email, password }).then(res => {
                 const { confirmed } = res;
+                console.log(res)
                 if (confirmed) {
                     setIsLoad(false);
                     router.push('/')

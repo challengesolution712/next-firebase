@@ -11,12 +11,12 @@ const login = async (data) => {
         let response = {}
         querySnapshot.forEach((doc) => {
             response = { ...doc.data() };
-            if(data.email === response.email && data.password === response.password) {
+            if (data.email === response.email && data.password === response.password) {
                 response.confirmed = true;
             }
         });
         if (response.confirmed) {
-            setUserCookie(response.email)
+            setUserCookie(response)
             resolve(response)
         } else {
             reject(response)

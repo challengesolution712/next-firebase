@@ -4,12 +4,12 @@ import Card from '../components/Card/Card'
 import Filter from '../components/Filter/Filter'
 import LoadCardsBtn from '../components/LoadCardsBtn/LoadCardsBtn'
 import { getUserFromCookie } from '../auth/cookies'
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router'
 
 export default function Home() {
 
-  const [currentUser, setCurrentUser] = useState(getUserFromCookie())
-  const router = useRouter()
+  // const [currentUser, setCurrentUser] = useState(getUserFromCookie())
+  // const router = useRouter()
 
   const [isLoad, setIsLoad] = useState(false)
 
@@ -17,9 +17,9 @@ export default function Home() {
     setIsLoad(true)
   }
 
-  useEffect(() => {
-    if(currentUser === undefined) router.push('/login')
-  }, [])
+  // useEffect(() => {
+  //   if(currentUser === undefined) router.push('/login')
+  // }, [])
 
 
 

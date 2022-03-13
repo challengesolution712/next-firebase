@@ -10,7 +10,7 @@ export const getUserFromCookie = () => {
 
 export const setUserCookie = (user) => {
     cookies.set('auth', user, {
-        secure: true,
-        expires: 1 / 24,
+        secure: true,  
+        expires: 1,
     })
 }

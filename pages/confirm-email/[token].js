@@ -33,3 +33,6 @@ index.getInitialProps = async ({ query }) => {
 }
 
 export default index
+
+
+
