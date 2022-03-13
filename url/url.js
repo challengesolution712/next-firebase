@@ -1,1 +1,1 @@
-export default process.env.URL || 'http://localhost:300'
+export default process.env.URL || 'http://localhost:3000'
