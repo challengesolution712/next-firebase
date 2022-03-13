@@ -14,8 +14,7 @@ import {
     addDoc,
     updateDoc
 } from "firebase/firestore";
-// if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
-// const app = initializeApp(config);
+
 const app = !getApps().length ? initializeApp(config) : getApp()
 const auth = getAuth(app);
 const db = getFirestore(app);
