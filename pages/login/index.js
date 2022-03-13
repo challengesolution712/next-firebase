@@ -43,8 +43,16 @@ const index = () => {
 
             // Back end
             setIsLoad(true)
-            login(email, password)
-            // router.push('/')
+            login({ email, password }).then(res => {
+                const { confirmed } = res;
+                if (confirmed) {
+                    setIsLoad(false);
+                    router.push('/')
+                } else {
+                    setIsLoad(false);
+                    setErrMsg("Sorry! Your Email or Password is incorrect");
+                }
+            })
         }
     }
 

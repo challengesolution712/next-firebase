@@ -56,7 +56,7 @@ const index = () => {
                 password,
                 role: selecedtItem,
                 token: tokgen.generate(),
-                conirmed: false
+                confirmed: false
             }
 
             axios.post("/api/signup", { data,  url: location.origin}).then(res => {

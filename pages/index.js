@@ -1,16 +1,26 @@
 import Head from 'next/head'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Card from '../components/Card/Card'
 import Filter from '../components/Filter/Filter'
 import LoadCardsBtn from '../components/LoadCardsBtn/LoadCardsBtn'
+import { getUserFromCookie } from '../auth/cookies'
 
 export default function Home() {
+
+  const [currentUser, setCurrentUser] = useState(getUserFromCookie())
+
 
   const [isLoad, setIsLoad] = useState(false)
 
   const loadMore = () => {
     setIsLoad(true)
   }
+
+  useEffect(() => {
+    console.log("current user =>  " + currentUser)
+  }, [])
+
+
 
   return (
     <>
@@ -20,7 +30,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      
+
       <main className="mt-24 mb-5 mx-auto px-4 max-w-screen-lg lg:px-8">
         <div className="text-center max-w-xl mx-auto">
           <h1 className="text-4xl font-semibold">
