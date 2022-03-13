@@ -8,10 +8,11 @@ export default function handler(req, res) {
     const { data, url } = req.body  
 
     const text = `Please click the link below or copy and paste the url in your browser to confirm your email \n ${url}/confirm-email/${data.token}`
-    const subject = 'Confirm your subscription'
+    const subject = 'Confirm your email'
 
     const dbInstance = collection(db, 'users')
     const email = query(collection(db, 'users'), where('email', '==', data.email))
+
     getDocs(email).then(querySnapshot => {
         if (querySnapshot.empty) {
             //add the Document
@@ -24,8 +25,6 @@ export default function handler(req, res) {
 
             })
 
-        } else {
-            res.json({success: false, msg: "This email is already exist"})
-        }
+        } else res.json({success: false, msg: "This email is already exist"})
     })
 }

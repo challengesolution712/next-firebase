@@ -10,14 +10,12 @@ import ErrorAlert from "../../components/Alerts/ErrorAlert"
 import InfoAlert from "../../components/Alerts/InfoAlert"
 import Head from "next/head"
 import Link from "next/link"
-import { useRouter } from "next/router"
 import axios from "axios"
 
 
 const index = () => {
 
     const tokgen = new TokenGenerator(256, TokenGenerator.BASE62)
-    const router = useRouter()
 
     const [isLoad, setIsLoad] = useState(false)
 
@@ -65,21 +63,14 @@ const index = () => {
                 if (success) {
                     setInfoMsg(msg)
                     setIsLoad(false)
+                    setEmail("")
+                    setPassword("")
+                    setSelecedtItem("")
                 } else {
                     setErrMsg(msg)
                     setIsLoad(false)
                 }
             })
-
-            // signup(data, location.origin).then(res => {
-            //     if (res.success) {
-            //         setIsLoad(false)
-            //         setInfoMsg("Please check out your email for confirmation")
-            //     }
-            // }).catch(res => {
-            //     setIsLoad(false)
-            //     setErrMsg(res.msg)
-            // })
         }
     }
 
