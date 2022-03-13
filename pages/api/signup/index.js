@@ -12,6 +12,7 @@ export default function handler(req, res) {
 
     const dbInstance = collection(db, 'users')
     const email = query(collection(db, 'users'), where('email', '==', data.email))
+
     getDocs(email).then(querySnapshot => {
         if (querySnapshot.empty) {
             //add the Document
@@ -24,8 +25,6 @@ export default function handler(req, res) {
 
             })
 
-        } else {
-            res.json({success: false, msg: "This email is already exist"})
-        }
+        } else res.json({success: false, msg: "This email is already exist"})
     })
 }
