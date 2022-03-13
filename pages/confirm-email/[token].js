@@ -25,7 +25,7 @@ const index = ({ data }) => {
 
 index.getInitialProps = async ({ query }) => {
     const { token } = query
-    const { data } = await axios.get(`${url}/${token}`)
+    const { data } = await axios.get(`${url}/api/${token}`)
     return {
         data
     }

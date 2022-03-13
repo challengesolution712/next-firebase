@@ -15,7 +15,7 @@ export default function handler(req, res) {
                 confirmed: true
             })
 
-            await res.json({ exist: true, id })
+            await res.json({ exist: true, id, user })
         }
     })
 
