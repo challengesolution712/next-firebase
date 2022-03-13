@@ -16,7 +16,7 @@ const login = async (data) => {
             }
         });
         if (response.confirmed) {
-            setUserCookie(response)
+            setUserCookie(response.token)
             resolve(response)
         } else {
             reject(response)

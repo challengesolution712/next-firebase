@@ -8,8 +8,8 @@ import { useRouter } from 'next/router'
 
 export default function Home() {
 
-  // const [currentUser, setCurrentUser] = useState(getUserFromCookie())
-  // const router = useRouter()
+  const [currentUser, setCurrentUser] = useState(getUserFromCookie())
+  const router = useRouter()
 
   const [isLoad, setIsLoad] = useState(false)
 
@@ -17,9 +17,9 @@ export default function Home() {
     setIsLoad(true)
   }
 
-  // useEffect(() => {
-  //   if(currentUser === undefined) router.push('/login')
-  // }, [])
+  useEffect(() => {
+    if(currentUser === undefined) router.push('/login')
+  }, [])
 
 
 
