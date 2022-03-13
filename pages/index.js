@@ -17,9 +17,9 @@ export default function Home() {
     setIsLoad(true)
   }
 
-  useEffect(() => {
-    if(currentUser === undefined) router.push('/login')
-  }, [])
+  // useEffect(() => {
+  //   if(currentUser === undefined) router.push('/login')
+  // }, [])
 
 
 
