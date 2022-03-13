@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApps, getApp } from "firebase/app";
 import { config } from './config'
 import {
     getAuth,
@@ -13,8 +13,9 @@ import {
     where,
     addDoc,
 } from "firebase/firestore";
-
-const app = initializeApp(config);
+// if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+// const app = initializeApp(config);
+const app = !getApps().length ? initializeApp(config) : getApp()
 const auth = getAuth(app);
 const db = getFirestore(app);
 
@@ -25,8 +26,11 @@ export {
     db,
     setDoc,
     addDoc,
+    getDocs,
     doc,
-    collection
+    collection,
+    query,
+    where,
 };
 
 

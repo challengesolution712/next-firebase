@@ -11,7 +11,7 @@ import InfoAlert from "../../components/Alerts/InfoAlert"
 import Head from "next/head"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import signup from "../../Firebase/signup"
+import axios from "axios"
 
 
 const index = () => {
@@ -59,13 +59,27 @@ const index = () => {
                 conirmed: false
             }
 
-            signup(data).then(res => {
-                if (res.success) setIsLoad(false)
+            axios.post("/api/signup", { data,  url: location.origin}).then(res => {
                 
-            })            
-            
-            // router.push('/login')
+                const { success, msg } = res.data
+                if (success) {
+                    setInfoMsg(msg)
+                    setIsLoad(false)
+                } else {
+                    setErrMsg(msg)
+                    setIsLoad(false)
+                }
+            })
 
+            // signup(data, location.origin).then(res => {
+            //     if (res.success) {
+            //         setIsLoad(false)
+            //         setInfoMsg("Please check out your email for confirmation")
+            //     }
+            // }).catch(res => {
+            //     setIsLoad(false)
+            //     setErrMsg(res.msg)
+            // })
         }
     }
 
@@ -109,6 +123,7 @@ const index = () => {
                             Email
                         </label>
                         <Input
+                            value={email}
                             className="w-full"
                             type="email"
                             placeholder="Enter your email"
@@ -123,6 +138,7 @@ const index = () => {
                             Password
                         </label>
                         <Input
+                            value={password}
                             className="w-full"
                             type="password"
                             placeholder="Enter your password"
@@ -137,6 +153,7 @@ const index = () => {
                             Role
                         </label>
                         <SelectMenu
+                            value={selecedtItem}
                             disabledItem="Select your role"
                             menuItems={menuItems}
                             onChange={(e) => setSelecedtItem(e.target.value)}
