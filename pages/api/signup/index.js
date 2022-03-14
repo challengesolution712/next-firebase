@@ -1,5 +1,5 @@
-import emailTemplate from '../../../sendgrid/emailTemplate';
-import sendgrid from '../../../sendgrid/sendgrid';
+import emailTemplate from '../../../sendMail/emailTemplate';
+import sendMail from '../../../sendMail/sendMail';
 import { db, addDoc, collection, getDocs, where, query } from '../../../Firebase/firebase'
 
 
@@ -19,7 +19,7 @@ export default function handler(req, res) {
             addDoc(dbInstance, data)
             .then(() => {
 
-                sendgrid({to: data.email, subject, text, html: emailTemplate(`${url}/confirmation/${data.token}`)}).then(success => {
+                sendMail({to: data.email, subject, text, html: emailTemplate(`${url}/confirmation/${data.token}`)}).then(success => {
                     if (success) res.json({success: true, msg: "Please check out your email for confirmation"})
                 })
 
