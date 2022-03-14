@@ -7,7 +7,7 @@ export default function handler(req, res) {
 
     const { data, url } = req.body  
 
-    const text = `Please click the link below or copy and paste the url in your browser to confirm your email \n ${url}/confirm-email/${data.token}`
+    const text = `Please click the link below or copy and paste the url in your browser to confirm your email \n ${url}/confirmation/${data.token}`
     const subject = 'Confirm your email'
 
     const dbInstance = collection(db, 'users')
@@ -19,7 +19,7 @@ export default function handler(req, res) {
             addDoc(dbInstance, data)
             .then(() => {
 
-                sendgrid({to: data.email, subject, text, html: emailTemplate(`${url}/confirm-email/${data.token}`)}).then(success => {
+                sendgrid({to: data.email, subject, text, html: emailTemplate(`${url}/confirmation/${data.token}`)}).then(success => {
                     if (success) res.json({success: true, msg: "Please check out your email for confirmation"})
                 })
 

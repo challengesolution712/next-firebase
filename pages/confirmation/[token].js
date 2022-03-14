@@ -1,19 +1,21 @@
 import axios from "axios";
 import { useRouter } from "next/router"
-import { useEffect } from "react/cjs/react.development";
+import { useEffect } from "react";
 import url from "../../url/url";
 
-const index = () => {
+const token = () => {
 
     const router = useRouter()
     const { token } = router.query
 
     useEffect( async () => {
-        const { data } = await axios.get(`${url}/api/confirm-email/${token}`)
-        console.log(data);
-        if (data && data.exist) {
-            router.push(`/dashboard/${data.id}`)
-        } else router.push("/signup")
+        if (token) {
+            const { data } = await axios.get(`${url}/api/confirmation/${token}`, { params: {token} })
+            console.log(data);
+            if (data && data.exist) {
+                router.push(`/dashboard/${data.id}`)
+            } else router.push("/signup")
+        }
     }, [token])
 
     
@@ -33,7 +35,7 @@ const index = () => {
 
 // }
 
-export default index
+export default token
 
 
 
