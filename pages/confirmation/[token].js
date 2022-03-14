@@ -2,11 +2,13 @@ import axios from "axios";
 import { useRouter } from "next/router"
 import { useEffect } from "react";
 import url from "../../url/url";
+import jwt from "jsonwebtoken";
+import { setTokenCookie } from "../../auth/cookies";
+import { jwtSign } from "../../auth/jwt";
 
 const token = ({ data }) => {
 
     const router = useRouter()
-    const { token } = router.query
 
     // useEffect( async () => {
     //     if (token) {
@@ -19,9 +21,16 @@ const token = ({ data }) => {
     // }, [token])
 
     useEffect( async () => {
-            // const { data } = await axios.get(`${url}/api/confirmation/${token}`, { params: {token} })
         if (data && data.exist) {
-            router.push(`/dashboard/${data.id}`)
+
+            const { id, user } = data
+
+            const token = await jwtSign(user)
+            
+            await setTokenCookie(token)
+
+            await router.push(`/dashboard/${id}`)
+            
         } else router.push("/signup")
     }, [])
 
