@@ -8,7 +8,6 @@ export const getUserFromCookie = () => {
     return cookie
 }
 
-export const getCookie = name => cookies.get(name)
 
 export const setUserCookie = (user) => {
     cookies.set('auth', user, {
@@ -16,6 +15,8 @@ export const setUserCookie = (user) => {
         expires: 1,
     })
 }
+
+export const getCookie = name => cookies.get(name)
 
 export const setTokenCookie = user => {
     cookies.set('token', user, {
