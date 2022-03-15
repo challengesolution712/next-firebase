@@ -11,9 +11,11 @@ import InfoAlert from "../../components/Alerts/InfoAlert"
 import Head from "next/head"
 import Link from "next/link"
 import axios from "axios"
+import Auth from "../../components/ProtectedRoute/Auth"
+import FormLayout from "../../components/ProtectedRoute/FormLayout"
 
 
-const index = () => {
+const index = ({ user }) => {
 
     const tokgen = new TokenGenerator(256, TokenGenerator.BASE62)
 
@@ -77,7 +79,7 @@ const index = () => {
     const menuItems = ["Student", "Organization", "Mentor"]
 
     return (
-        <>
+        <FormLayout data={user}>
             <Head>
                 <title>Sign up</title>
             </Head>
@@ -175,8 +177,8 @@ const index = () => {
                     </div>
                 </form>
             </div>
-        </>
+        </FormLayout>
     )
 }
 
-export default index
+export default Auth(index)

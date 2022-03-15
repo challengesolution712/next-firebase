@@ -8,9 +8,10 @@ import { useState, useEffect } from "react"
 import Button from "../../../components/Button/Button"
 import Loading from "../../../components/Loading/Loading"
 import validator from "email-validator"
+import Auth from '../../../components/ProtectedRoute/Auth'
+import Layout from '../../../components/ProtectedRoute/Layout'
 
-
-export default () => {
+const index = ({ user }) => {
 
     const [state, setState] = useState({
         title: "",
@@ -98,149 +99,153 @@ export default () => {
     const { title, phone, email, aid, country, details } = errors
 
     return (
-        <div className="my-24 mx-auto px-4 max-w-screen-lg">
-            <div className="bg-white shadow rounded-md p-4">
-                <h2 className="mt-2 text-center text-gray-800 text-2xl font-medium">
-                    Edit post
-                </h2>
+        <Layout data={user}>
+            <div className="my-24 mx-auto px-4 max-w-screen-lg">
+                <div className="bg-white shadow rounded-md p-4">
+                    <h2 className="mt-2 text-center text-gray-800 text-2xl font-medium">
+                        Edit post
+                    </h2>
 
-                <div className="mt-12">
-                    <form
-                        onSubmit={handleSubmit}
-                        className="space-y-3"
-                    >
-                        <div className="grid-cols-2 gap-x-8 sm:grid">
-                            <div>
-                                <label className="text-gray-500 py-3 block">
-                                    Title
-                                </label>
-                                <Input
-                                    onChange={(e) => setState({
-                                        ...state,
-                                        title: e.target.value
-                                    })}
-                                    className="w-full"
-                                    type="text"
-                                    placeholder="Enter post title"
-                                />
-                                <Error>
-                                    { title }
-                                </Error>
-                            </div>
-                            <div>
-                                <label className="text-gray-500 py-3 block">
-                                    Phone number
-                                </label>
-                                <Input
-                                    onChange={(e) => setState({
-                                        ...state,
-                                        phone: e.target.value
-                                    })}
-                                    className="w-full"
-                                    type="number"
-                                    placeholder="Enter phone number"
-                                />
-                                <Error>
-                                    { phone }
-                                </Error>
-                            </div>
-                            <div>
-                                <label className="text-gray-500 py-3 block">
-                                    Email
-                                </label>
-                                <Input
-                                    onChange={(e) => setState({
-                                        ...state,
-                                        email: e.target.value
-                                    })}
-                                    className="w-full"
-                                    type="email"
-                                    placeholder="Enter email"
-                                />
-                                <Error>
-                                    { email }
-                                </Error>
-                            </div>
-                            <div>
-                                <label className="text-gray-500 py-3 block">
-                                    Aid type
-                                </label>
-                                <SelectMenu
-                                    onChange={(e) => setState({
-                                        ...state,
-                                        aid: e.target.value
-                                    })}
-                                    disabledItem="Type"
-                                    menuItems={aids}
-                                />
-                                <Error>
-                                    { aid }
-                                </Error>
-                            </div>
-                            <div>
-                                <label className="text-gray-500 py-3 block">
-                                    Country
-                                </label>
-                                <SelectMenuSearch
-                                    menuItems={countries}
-                                    selectedItem={selectedItem}
-                                    setSelectedItem={setSelectedItem}
-                                />
-                                <Error>
-                                    { country }
-                                </Error>
-                            </div>
-                            {
-                                cities.length > 0 ? (
-                                    <div>
-                                        <label className="text-gray-500 py-3 block">
-                                            City
-                                        </label>
-                                        <SelectMenu
-                                            onChange={(e) => setState({
-                                                ...state,
-                                                city: e.target.value
-                                            })}
-                                            disabledItem="Select a city"
-                                            menuItems={cities}
-                                            setSelectedItem={setSelectedItem}
-                                        />
-                                    </div>
-                                ) : ""
-                            }
-                        </div>
-                        <div>
-                            <label className="text-gray-500 py-3 block">
-                                Details
-                            </label>
-                            <textarea
-                                onChange={(e) => setState({
-                                    ...state,
-                                    details: e.target.value
-                                })}
-                                className="outline-none border rounded-md p-3 w-full h-48"
-                                placeholder="Please write full, clear, enough details"
-                            />
-                            <Error>
-                                { details }
-                            </Error>
-                        </div>
-                        <div>
-                            <Button
-                                type="submit"
-                                className="flex items-center justify-center mt-4 w-full ring-offset-2 ring-indigo-500 focus:ring-2"
-                            >
+                    <div className="mt-12">
+                        <form
+                            onSubmit={handleSubmit}
+                            className="space-y-3"
+                        >
+                            <div className="grid-cols-2 gap-x-8 sm:grid">
+                                <div>
+                                    <label className="text-gray-500 py-3 block">
+                                        Title
+                                    </label>
+                                    <Input
+                                        onChange={(e) => setState({
+                                            ...state,
+                                            title: e.target.value
+                                        })}
+                                        className="w-full"
+                                        type="text"
+                                        placeholder="Enter post title"
+                                    />
+                                    <Error>
+                                        { title }
+                                    </Error>
+                                </div>
+                                <div>
+                                    <label className="text-gray-500 py-3 block">
+                                        Phone number
+                                    </label>
+                                    <Input
+                                        onChange={(e) => setState({
+                                            ...state,
+                                            phone: e.target.value
+                                        })}
+                                        className="w-full"
+                                        type="number"
+                                        placeholder="Enter phone number"
+                                    />
+                                    <Error>
+                                        { phone }
+                                    </Error>
+                                </div>
+                                <div>
+                                    <label className="text-gray-500 py-3 block">
+                                        Email
+                                    </label>
+                                    <Input
+                                        onChange={(e) => setState({
+                                            ...state,
+                                            email: e.target.value
+                                        })}
+                                        className="w-full"
+                                        type="email"
+                                        placeholder="Enter email"
+                                    />
+                                    <Error>
+                                        { email }
+                                    </Error>
+                                </div>
+                                <div>
+                                    <label className="text-gray-500 py-3 block">
+                                        Aid type
+                                    </label>
+                                    <SelectMenu
+                                        onChange={(e) => setState({
+                                            ...state,
+                                            aid: e.target.value
+                                        })}
+                                        disabledItem="Type"
+                                        menuItems={aids}
+                                    />
+                                    <Error>
+                                        { aid }
+                                    </Error>
+                                </div>
+                                <div>
+                                    <label className="text-gray-500 py-3 block">
+                                        Country
+                                    </label>
+                                    <SelectMenuSearch
+                                        menuItems={countries}
+                                        selectedItem={selectedItem}
+                                        setSelectedItem={setSelectedItem}
+                                    />
+                                    <Error>
+                                        { country }
+                                    </Error>
+                                </div>
                                 {
-                                    isLoad ? (
-                                        <Loading />
-                                    ) : ''
+                                    cities.length > 0 ? (
+                                        <div>
+                                            <label className="text-gray-500 py-3 block">
+                                                City
+                                            </label>
+                                            <SelectMenu
+                                                onChange={(e) => setState({
+                                                    ...state,
+                                                    city: e.target.value
+                                                })}
+                                                disabledItem="Select a city"
+                                                menuItems={cities}
+                                                setSelectedItem={setSelectedItem}
+                                            />
+                                        </div>
+                                    ) : ""
                                 }
-                                Update
-                            </Button>
-                        </div>
-                    </form>
+                            </div>
+                            <div>
+                                <label className="text-gray-500 py-3 block">
+                                    Details
+                                </label>
+                                <textarea
+                                    onChange={(e) => setState({
+                                        ...state,
+                                        details: e.target.value
+                                    })}
+                                    className="outline-none border rounded-md p-3 w-full h-48"
+                                    placeholder="Please write full, clear, enough details"
+                                />
+                                <Error>
+                                    { details }
+                                </Error>
+                            </div>
+                            <div>
+                                <Button
+                                    type="submit"
+                                    className="flex items-center justify-center mt-4 w-full ring-offset-2 ring-indigo-500 focus:ring-2"
+                                >
+                                    {
+                                        isLoad ? (
+                                            <Loading />
+                                        ) : ''
+                                    }
+                                    Update
+                                </Button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        </Layout>
     )
 }
+
+export default Auth(index)

@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken"
 
 export const jwtSign = value => {
     return jwt.sign({ value }, process.env.SECRET, {
-        expiresIn: process.env.EXP
+        expiresIn: "3d"
     })
 }
 

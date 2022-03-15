@@ -11,8 +11,10 @@ import Head from "next/head"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import login from "../../Firebase/login"
+import Auth from "../../components/ProtectedRoute/Auth"
+import FormLayout from "../../components/ProtectedRoute/FormLayout"
 
-const index = () => {
+const index = ({ user }) => {
 
     const [isLoad, setIsLoad] = useState(false)
 
@@ -23,7 +25,6 @@ const index = () => {
     const [passErr, setPassErr] = useState("")
 
     const [errMsg, setErrMsg] = useState("")
-    const [infoMsg, setInfoMsg] = useState("")
 
     const router = useRouter()
 
@@ -35,7 +36,6 @@ const index = () => {
 
         // Error messages
         setErrMsg("")
-        setInfoMsg("")
 
         if (!validator.validate(email)) setEmailErr("Please enter correct email")
         else if (password.length < 8) setPassErr("Password should not be less than 8 character")
@@ -57,7 +57,7 @@ const index = () => {
     }
 
     return (
-        <>
+        <FormLayout data={user}>
             <Head>
                 <title>Login</title>
             </Head>
@@ -129,8 +129,8 @@ const index = () => {
                     </div>
                 </form>
             </div>
-        </>
+        </FormLayout>
     )
 }
 
-export default index
+export default Auth(index)

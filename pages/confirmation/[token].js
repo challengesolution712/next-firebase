@@ -24,8 +24,15 @@ const token = ({ data }) => {
         if (data && data.exist) {
 
             const { id, user } = data
+            const auth = {
+                user: {
+                    id,
+                    ...user
+                },
+                loggedIn: true
+            }
 
-            const token = await jwtSign(user)
+            const token = await jwtSign(auth)
             
             await setTokenCookie(token)
 

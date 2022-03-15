@@ -21,6 +21,6 @@ export const getCookie = name => cookies.get(name)
 export const setTokenCookie = user => {
     cookies.set('token', user, {
         secure: true,  
-        expires: process.env.EXP
+        expires: 3
     })
 }
