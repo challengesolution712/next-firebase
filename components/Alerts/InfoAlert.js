@@ -1,6 +1,6 @@
 export default ({ title, msg, onClick }) => {
     return (
-        <div className="mt-12 mx-4 px-4 rounded-md bg-blue-50 md:max-w-2xl md:mx-auto">
+        <div id="info-alert" className="mt-12 mx-4 px-4 rounded-md bg-blue-50 md:max-w-2xl md:mx-auto">
             <div className="flex justify-between py-3">
                 <div className="flex">
                     <div>

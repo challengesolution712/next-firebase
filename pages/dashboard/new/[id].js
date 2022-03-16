@@ -20,7 +20,8 @@ const index = ({ user }) => {
         aid: "",
         country: "",
         city: "",
-        details: ""
+        details: "",
+        authorId: user.value?.user?.id
     })
 
     const [errors, setErrors] = useState({

@@ -9,10 +9,12 @@ import {
     getDocs,
     collection,
     doc,
+    getDoc,
     setDoc,
     where,
     addDoc,
-    updateDoc
+    updateDoc,
+    onSnapshot
 } from "firebase/firestore";
 
 const app = !getApps().length ? initializeApp(config) : getApp()
@@ -25,11 +27,13 @@ export {
     setDoc,
     addDoc,
     getDocs,
+    getDoc,
     doc,
     collection,
     query,
     where,
-    updateDoc
+    updateDoc,
+    onSnapshot
 };
 
 
