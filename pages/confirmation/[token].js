@@ -5,6 +5,7 @@ import url from "../../url/url";
 import jwt from "jsonwebtoken";
 import { setTokenCookie } from "../../auth/cookies";
 import { jwtSign } from "../../auth/jwt";
+import TextLoading from "../../components/TextLoading/TextLoading";
 
 const token = ({ data }) => {
 
@@ -42,11 +43,7 @@ const token = ({ data }) => {
     }, [])
 
     
-    return (
-        <div className="mt-24 text-gray-800 text-3xl text-center font-medium">
-            Loading...
-        </div>
-    )
+    return <TextLoading />
 }
 
 token.getInitialProps = async ({ query }) => {

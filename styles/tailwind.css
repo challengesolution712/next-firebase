@@ -19,3 +19,26 @@ body {
        transform: translateY(0)
    }
 }
+
+.text-loading {
+    @apply overflow-hidden z-10 inline-block;
+}
+
+.text-loading .dote-container {
+    @apply relative;
+}
+
+.text-loading .dote-container::after {
+    content: '';
+    @apply absolute w-7 h-full bg-gray-50;
+    animation: dote-move 1s infinite;
+}
+
+@keyframes dote-move {
+    0% {
+        @apply left-0;
+    }
+    100% {
+        @apply left-[1.9rem];
+    }
+}
