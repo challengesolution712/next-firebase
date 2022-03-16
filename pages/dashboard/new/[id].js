@@ -10,8 +10,12 @@ import Loading from "../../../components/Loading/Loading"
 import validator from "email-validator"
 import Auth from '../../../components/ProtectedRoute/Auth'
 import Layout from '../../../components/ProtectedRoute/Layout'
+import { useRouter } from "next/router"
 
 const index = ({ user }) => {
+
+    const router = useRouter()
+    const { id } = router.query
 
     const [state, setState] = useState({
         title: "",
@@ -21,7 +25,7 @@ const index = ({ user }) => {
         country: "",
         city: "",
         details: "",
-        authorId: user.value?.user?.id
+        authorId: id
     })
 
     const [errors, setErrors] = useState({
