@@ -7,7 +7,7 @@ export default ({ to, subject, text, html }) => {
     return new Promise((resolve, reject) => {
 
         mail.send({
-        from: 'challengesolution712@gmail.com',
+        from: 'sidicoder@gmail.com',
         to,
         subject,
         text,
