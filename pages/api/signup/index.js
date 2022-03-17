@@ -13,18 +13,22 @@ export default function handler(req, res) {
     const dbInstance = collection(db, 'users')
     const email = query(collection(db, 'users'), where('email', '==', data.email))
 
-    getDocs(email).then(querySnapshot => {
-        if (querySnapshot.empty) {
-            //add the Document
-            addDoc(dbInstance, data)
-            .then(() => {
-
-                sendMail({to: data.email, subject, text, html: emailTemplate(`${url}/confirmation/${data.token}`)}).then(success => {
-                    if (success) res.json({success: true, msg: "Please check out your email for confirmation"})
-                })
-
-            })
-
-        } else res.json({success: false, msg: "This email is already exist"})
+    sendMail({to: data.email, subject, text, html: emailTemplate(`${url}/confirmation/${data.token}`)}).then(success => {
+        if (success) res.json({success: true, msg: "Please check out your email for confirmation"})
     })
+
+    // getDocs(email).then(querySnapshot => {
+    //     if (querySnapshot.empty) {
+    //         //add the Document
+    //         addDoc(dbInstance, data)
+    //         .then(() => {
+
+    //             sendMail({to: data.email, subject, text, html: emailTemplate(`${url}/confirmation/${data.token}`)}).then(success => {
+    //                 if (success) res.json({success: true, msg: "Please check out your email for confirmation"})
+    //             })
+
+    //         })
+
+    //     } else res.json({success: false, msg: "This email is already exist"})
+    // })
 }
