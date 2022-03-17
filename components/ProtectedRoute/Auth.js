@@ -3,11 +3,12 @@ import { jwtVerify } from "../../auth/jwt"
 
 const ProtectedRoute = (Component) => {
     
-    Component.getInitialProps = ({ req }) => {
+    Component.getInitialProps = ({ req, query }) => {
         const { token } = parseCookie(req)
+        const { id } = query
         const data = token ? jwtVerify(token) : {}
         
-        return { user: data }
+        return { user: data, id }
     }
 
     return Component

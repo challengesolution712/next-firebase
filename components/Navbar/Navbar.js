@@ -1,17 +1,19 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
-import useSWR from 'swr'
 import { getCookie } from '../../auth/cookies';
-import url from '../../url/url'
-import axios from 'axios';
+import { jwtVerify } from '../../auth/jwt'
+import logout from '../../auth/logout'
+import { useRouter } from 'next/router';
+import { AuthLink, ProtectedLink } from '../ProtectedLink/ProtectedLink';
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 export default (props) => {
 
     const [state, setState] = useState(false)
     const navRef = useRef()
-    const [user, setUser] = useState({})
+    const router = useRouter()
+    const toekn = getCookie('token')
+    const [user, setUser] = useState(null)
 
   // Replace javascript:void(0) path with your path
   const navigation = [
@@ -44,13 +46,19 @@ export default (props) => {
 
     }, [state])
 
-    const { data, error } = useSWR(`/api/hello`, fetcher)
+    useEffect(() => {
+        if (toekn) {
+            const { value } = jwtVerify(toekn)
+            setUser(value)
+        } else {
+            setUser(null)
+        }
+    }, [toekn])
 
-//   const [data, error] = useSSE(() => {
-//     return axios.get(`${url}/api/hello`).then(res => res.data())
-//   }, []);
-
-  console.log(props);
+    const handleLogout = () => {
+        logout()
+        router.push('/')
+    }
 
 
   return (
@@ -58,7 +66,7 @@ export default (props) => {
 
           <div className="items-center px-4 py-2 max-w-screen-lg mx-auto lg:flex">
               <div className="flex justify-between items-center py-3 lg:py-5 lg:block">
-                    <a href="javascript:void(0)">
+                    <a href="/">
                         <img
                             src="/logo.svg" 
                             width={150} 
@@ -84,36 +92,62 @@ export default (props) => {
               </div>
               <div className={`flex-1 justify-center pb-3 mt-8 lg:flex lg:pb-0 lg:mt-0 ${ state ? 'block' : 'hidden'}`}>
                     <ul className="order-2 flex flex-col-reverse space-x-0 mb-6 lg:space-x-6 lg:flex-row lg:mb-0">
-                        <li className="nav-item mt-4 lg:mt-0">
-                            <Link href="/login">
-                                <a className="py-3 px-4 text-center border text-gray-600 hover:text-indigo-600 rounded-lg block lg:inline lg:border-0">
-                                    Login
-                                </a>
-                            </Link>
-                        </li>
-                        <li className="nav-item mt-8 lg:mt-0">
-                            <Link href="/signup">
-                                <a className="py-3 px-4 text-center text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow block lg:inline">
-                                    Sign Up
-                                </a>
-                            </Link>
-                        </li>
+                        <AuthLink isLoggedIn={user?.loggedIn}>
+                            <li className="nav-item mt-4 lg:mt-0">
+                                <Link href="/login">
+                                    <a className="py-3 px-4 text-center border text-gray-600 hover:text-indigo-600 rounded-lg block lg:inline lg:border-0">
+                                        Login
+                                    </a>
+                                </Link>
+                            </li>
+                        </AuthLink>
+                        <AuthLink isLoggedIn={user?.loggedIn}>
+                            <li className="nav-item mt-8 lg:mt-0">
+                                <Link href="/signup">
+                                    <a className="py-3 px-4 text-center text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow block lg:inline">
+                                        Sign Up
+                                    </a>
+                                </Link>
+                            </li>
+                        </AuthLink>
+                        <ProtectedLink isLoggedIn={user?.loggedIn}>
+                            <li className="nav-item mt-8 lg:mt-0">
+                                <button className="w-full text-gray-700 hover:text-gray-900 hover:bg-gray-50 flex items-center justify-between border rounded-md p-2.5 md:border-none md:p-0 md:hover:bg-transparent"
+                                    onClick={handleLogout}
+                                >
+                                    Logout
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fillRule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clipRule="evenodd" />
+                                    </svg>
+                                </button>
+                            </li>
+                        </ProtectedLink>
                     </ul>
                     <div className="flex-1">
                         <ul className="justify-center items-center space-y-8 lg:flex lg:space-x-6 lg:space-y-0">
-                            {
-                                navigation.map((item, idx) => {
-                                    return (
-                                        <li key={idx} className="nav-item text-gray-600 hover:text-indigo-600">
-                                            <Link href={item.path}>
-                                                <a className="block">
-                                                    { item.title }
-                                                </a>
-                                            </Link>
-                                        </li>
-                                    )
-                                })
-                            }
+                            <li className="nav-item text-gray-600 hover:text-indigo-600">
+                                <Link href="/">
+                                    <a className="block">
+                                        Home
+                                    </a>
+                                </Link>
+                            </li>
+                            <li className="nav-item text-gray-600 hover:text-indigo-600">
+                                <Link href="/about">
+                                    <a className="block">
+                                        About us
+                                    </a>
+                                </Link>
+                            </li>
+                            <ProtectedLink isLoggedIn={user?.loggedIn}>                                
+                                <li className="nav-item text-gray-600 hover:text-indigo-600">
+                                    <Link href={'/dashboard/'+user?.user?.id}>
+                                        <a className="block">
+                                            Dashboard
+                                        </a>
+                                    </Link>
+                                </li>
+                            </ProtectedLink>
                         </ul>
                     </div>
               </div>

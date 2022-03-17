@@ -4,10 +4,10 @@ import Auth from "../../components/ProtectedRoute/Auth"
 import Layout from "../../components/ProtectedRoute/Layout"
 import UserPost from "../../components/UserPost/UserPost"
 
-const index = ({ user }) => {
+const index = ({ user, id }) => {
     
     return (
-        <Layout data={user}>
+        <Layout id={id} data={user}>
             <div className="mt-24 mx-auto px-4 max-w-screen-lg">
                 <div className="bg-white shadow rounded-md p-4">
                     <div className="py-3 border-b items-center justify-between sm:flex">
@@ -19,7 +19,7 @@ const index = ({ user }) => {
                                 Create a new post easily and quickly
                             </p>
                         </div>
-                        <Link href="/dashboard/new/dsfgdfsdfgf">
+                        <Link href={`/dashboard/new/${id}`}>
                             <a className="block mt-3 sm:mt-0">
                                 <Button className="py-2.5 flex items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">

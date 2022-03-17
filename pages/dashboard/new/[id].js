@@ -12,10 +12,9 @@ import Auth from '../../../components/ProtectedRoute/Auth'
 import Layout from '../../../components/ProtectedRoute/Layout'
 import { useRouter } from "next/router"
 
-const index = ({ user }) => {
+const index = ({ user, id }) => {
 
     const router = useRouter()
-    const { id } = router.query
 
     const [state, setState] = useState({
         title: "",
@@ -104,7 +103,7 @@ const index = ({ user }) => {
     const { title, phone, email, aid, country, details } = errors
 
     return (
-        <Layout data={user}>
+        <Layout id={id} data={user}>
             <div className="my-24 mx-auto px-4 max-w-screen-lg">
                 <div className="bg-white shadow rounded-md p-4">
                     <h2 className="mt-2 text-center text-gray-800 text-2xl font-medium">

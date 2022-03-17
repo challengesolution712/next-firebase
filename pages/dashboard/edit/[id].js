@@ -15,10 +15,9 @@ import axios from "axios"
 import { useRouter } from "next/router"
 import InfoAlert from "../../../components/Alerts/InfoAlert"
 
-const index = ({ user }) => {
+const index = ({ user, id }) => {
 
     const router = useRouter()
-    const { id } = router.query
 
     const [state, setState] = useState({
         title: "",
@@ -148,7 +147,7 @@ const index = ({ user }) => {
     const { title, phone, email, aid, country, details } = errors
 
     return (
-        <Layout data={user}>
+        <Layout id={id} data={user}>
 
             {
                 infoMsg.length != 0 ? (
