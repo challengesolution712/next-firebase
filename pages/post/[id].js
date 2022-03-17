@@ -85,15 +85,16 @@ export default () => {
                     </div>
                 </article>
             </div>
-
-            <Link href="/">
-                <a className="mt-10 inline-flex items-center py-3 px-8 shadow drop-shadow-xl rounded-md bg-indigo-600 text-white hover:bg-indigo-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M11 17l-5-5m0 0l5-5m-5 5h12" />
-                    </svg>
-                    Back
-                </a>
-            </Link>
+            <div className="md:mx-4 lg:mx-0">
+                <Link href="/">
+                    <a className="mt-10 inline-flex items-center py-3 px-8 shadow drop-shadow-xl rounded-md bg-indigo-600 text-white hover:bg-indigo-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M11 17l-5-5m0 0l5-5m-5 5h12" />
+                        </svg>
+                        Back
+                    </a>
+                </Link>
+            </div>
         </main>
     )
 }
