@@ -7,7 +7,7 @@ export default ({ to, subject, text, html }) => {
     return new Promise((resolve, reject) => {
 
         mail.send({
-        from: 'sidicoder@gmail.com',
+        from: process.env.EMAIL,
         to,
         subject,
         text,

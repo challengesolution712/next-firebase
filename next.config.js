@@ -3,6 +3,7 @@ module.exports = {
     SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
     URL: process.env.URL,
     SECRET: process.env.SECRET || "Token For Localhost hacking",
-    EXP: 3
+    EXP: 3,
+    EMAIL: process.env.EMAIL
   },
 }
