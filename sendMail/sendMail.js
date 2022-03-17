@@ -1,8 +1,8 @@
 import mail from '@sendgrid/mail'
 
-mail.setApiKey(SENDGRID_API_KEY)
-
 export default ({ to, subject, text, html }) => {
+    
+    mail.setApiKey(SENDGRID_API_KEY)
     
     return new Promise((resolve, reject) => {
 
