@@ -34,6 +34,10 @@ body {
     animation: dote-move 1s infinite;
 }
 
+.text-loading .bg-white::after {
+    background-color: #FFF !important
+}
+
 @keyframes dote-move {
     0% {
         @apply left-0;

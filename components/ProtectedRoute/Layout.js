@@ -13,7 +13,6 @@ const CustomPage404 = () => (
 export default (props) => {
 
     const { children, data, id } = props
-    console.log(id);
 
     return (
         data?.value?.loggedIn ? (

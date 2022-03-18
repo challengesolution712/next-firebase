@@ -41,7 +41,7 @@ const index = ({ user, id }) => {
 
     const [infoMsg, setInfoMsg] = useState("")
 
-    const aids = ["Scholarships", "Volunteer mentor", "Volunteer instructor", "Financial Aid"]
+    const aids = ["Scholarships", "Volunteer instructor", "Financial Aid"]
     
     const [cities, setCity] = useState([])
     const [selectedItem, setSelectedItem] = useState({
@@ -105,7 +105,7 @@ const index = ({ user, id }) => {
 
             const data = {...state}
             
-            axios.post(`/api/edit/${id}`, { data }).then(res => {
+            axios.post(`/api/edit/${id}/?post=${router.query.post}`, { data }).then(res => {
                 const { updated, msg } = res.data
                 if (updated) {
                     setIsLoad(false)
@@ -121,7 +121,7 @@ const index = ({ user, id }) => {
     useEffect(() => {
 
         if (id) {
-            axios.get(`/api/edit/${id}`).then(res => {
+            axios.get(`/api/edit/${id}/?post=${router.query.post}`).then(res => {
                 const { empty, post } = res.data
                 if (empty) router.push('/')
                 else {
@@ -139,8 +139,7 @@ const index = ({ user, id }) => {
                     })
                 }
             })
-        }
-        
+        }        
 
     }, [id])
 

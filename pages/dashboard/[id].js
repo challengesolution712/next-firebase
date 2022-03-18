@@ -3,8 +3,15 @@ import Button from "../../components/Button/Button"
 import Auth from "../../components/ProtectedRoute/Auth"
 import Layout from "../../components/ProtectedRoute/Layout"
 import UserPost from "../../components/UserPost/UserPost"
+import TextLoading from "../../components/TextLoading/TextLoading"
+import useSWR from 'swr'
+import FetchDataAlert from "../../components/FetchDataAlert/FetchDataAlert"
+
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 const index = ({ user, id }) => {
+
+    const { data, error } = useSWR(`/api/user/${id}`, fetcher)
     
     return (
         <Layout id={id} data={user}>
@@ -35,13 +42,20 @@ const index = ({ user, id }) => {
                         <h3 className="text-gray-800 text-xl font-medium">
                             All posts
                         </h3>
+                        {
+                            !data ? <TextLoading doteBg="bg-white" /> : (
+                                data.empty ? (
+                                    <FetchDataAlert 
+                                        info="You have not create any post yet!"
+                                    />
+                                ) : (
+                                    <ul className="mt-12 space-y-14">
+                                        <UserPost id={id} posts={data?.posts} />
+                                    </ul>
+                                )
+                            )
+                        }
 
-                        <ul className="mt-12 space-y-14">
-                            <UserPost />
-                            <UserPost />
-                            <UserPost />
-                            <UserPost />
-                        </ul>
                     </div>
                 </div>
             </div>
