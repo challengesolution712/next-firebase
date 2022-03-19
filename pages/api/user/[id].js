@@ -11,7 +11,10 @@ export default function handler(req, res) {
             else {
                 const data = []
                 querySnapshot.docs.forEach(items => {
-                    data.push(items.data())
+                    data.push({
+                        ...items.data(),
+                        id: items.id
+                    })
                 })
                 res.json({ empty: false, posts: data })
             }

@@ -1,4 +1,4 @@
-import { db, doc, updateDoc, query, getDocs, collection, where } from '../../../Firebase/firebase'
+import { db, doc, updateDoc, query, getDocs, collection, where, getDoc } from '../../../Firebase/firebase'
 
 export default async function handler(req, res) {
     const { data } = req.body
@@ -6,24 +6,23 @@ export default async function handler(req, res) {
     
     if (req.method == 'GET') {
             
-        const posts = query(collection(db, 'posts'), where('authorId', '==', id), where('id', '==', post))
+        const snap = await getDoc(doc(db, 'posts', post))
         
-        getDocs(posts).then(post => {
-            if (post.empty) {
-                res.json({ empty: true })
-            }
-            else {
-                res.json({ empty: false, post: post.docs[0].data() })
-            }
-        })
+        if (snap.exists() && snap.data().authorId == id) {
+
+            res.json({ empty: false, post: snap.data() })
+            
+        } else res.json({ empty: true })
 
     } else {
 
-        const postDoc = doc(db, "posts", post)
-        await updateDoc(postDoc, {
+        const docRef = doc(db, "posts", post)
+        updateDoc(docRef, {
             ...data
+        }).then(() => {
+            res.json({ updated: true, msg: "Your post updated successfuly" })
         })
-        await res.json({ updated: true, msg: "Your post updated successfuly" })
+        
         
     }
 }
