@@ -1,4 +1,4 @@
-import { db, doc, updateDoc, query, getDocs, collection, where, getDoc } from '../../../Firebase/firebase'
+import { db, doc, updateDoc, getDoc } from '../../../Firebase/firebase'
 
 export default async function handler(req, res) {
     const { data } = req.body

@@ -6,12 +6,37 @@ import UserPost from "../../components/UserPost/UserPost"
 import TextLoading from "../../components/TextLoading/TextLoading"
 import useSWR from 'swr'
 import FetchDataAlert from "../../components/FetchDataAlert/FetchDataAlert"
+import { useState } from "react"
+import ModalDanger from "../../components/Modals/ModalDanger"
+import axios from "axios"
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 const index = ({ user, id }) => {
 
+    const [state, setState] = useState({
+        bool: false,
+        id: ''
+    })
+
+    const [loading, setLoading] = useState(false)
+
     const { data, error } = useSWR(`/api/user/${id}`, fetcher)
+
+    const deletePost = () => {
+
+        setLoading(true)
+
+        axios.post(`/api/delete/${id}`, { id: state.id }).then(res => {
+            if (res.data.success) {
+                setLoading(false)
+                setState({
+                    bool: false,
+                    id: ''
+                })
+            }
+        })
+    }
     
     return (
         <Layout id={id} data={user}>
@@ -50,7 +75,11 @@ const index = ({ user, id }) => {
                                     />
                                 ) : (
                                     <ul className="mt-12 space-y-14">
-                                        <UserPost id={id} posts={data?.posts} />
+                                        <UserPost 
+                                            id={id} 
+                                            posts={data?.posts}
+                                            onClick={setState}
+                                        />
                                     </ul>
                                 )
                             )
@@ -59,6 +88,17 @@ const index = ({ user, id }) => {
                     </div>
                 </div>
             </div>
+            {
+                state.bool ? (
+                    <ModalDanger 
+                        title="Delete Post"
+                        desc="Are you sure you want to delete this post? Please click the delete button below"
+                        setState={() => setState({bool: false, id: ''})}
+                        loading={loading}
+                        onClick={deletePost}
+                    />
+                ) : ""
+            }
         </Layout>
     )
 }

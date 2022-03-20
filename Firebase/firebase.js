@@ -14,7 +14,8 @@ import {
     where,
     addDoc,
     updateDoc,
-    onSnapshot
+    onSnapshot,
+    deleteDoc
 } from "firebase/firestore";
 
 const app = !getApps().length ? initializeApp(config) : getApp()
@@ -33,7 +34,8 @@ export {
     query,
     where,
     updateDoc,
-    onSnapshot
+    onSnapshot,
+    deleteDoc
 };
 
 

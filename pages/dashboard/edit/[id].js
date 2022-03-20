@@ -272,7 +272,6 @@ const index = ({ user, id }) => {
                                                         defaultValue={state.city}
                                                         disabledItem="Select a city"
                                                         menuItems={cities}
-                                                        setSelectedItem={setSelectedItem}
                                                     />
                                                 </div>
                                             ) : ""
