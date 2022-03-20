@@ -21,7 +21,9 @@ const index = ({ user, id }) => {
 
     const [loading, setLoading] = useState(false)
 
-    const { data, error } = useSWR(`/api/user/${id}`, fetcher)
+    const { data, error } = useSWR(`/api/user/${id}`, fetcher, {
+        refreshInterval: 100
+    })
 
     const deletePost = () => {
 
