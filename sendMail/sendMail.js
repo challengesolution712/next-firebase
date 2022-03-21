@@ -2,7 +2,7 @@ import mail from '@sendgrid/mail'
 
 export default ({ to, subject, text, html }) => {
     
-    mail.setApiKey(SENDGRID_API_KEY)
+    mail.setApiKey("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")
     
     return new Promise((resolve, reject) => {
 

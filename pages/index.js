@@ -1,14 +1,14 @@
 import Head from 'next/head'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Card from '../components/Card/Card'
 import Filter from '../components/Filter/Filter'
 import LoadCardsBtn from '../components/LoadCardsBtn/LoadCardsBtn'
-import { getUserFromCookie } from '../auth/cookies'
 import { useRouter } from 'next/router'
+import axios from 'axios'
+import url from '../url/url'
 
-export default function Home() {
+export default function Home({ posts }) {
 
-  const [currentUser, setCurrentUser] = useState(getUserFromCookie())
   const router = useRouter()
 
   const [isLoad, setIsLoad] = useState(false)
@@ -16,12 +16,6 @@ export default function Home() {
   const loadMore = () => {
     setIsLoad(true)
   }
-
-  // useEffect(() => {
-  //   if(currentUser === undefined) router.push('/login')
-  // }, [])
-
-
 
   return (
     <>
@@ -43,11 +37,7 @@ export default function Home() {
         </div>
         <Filter />
         <ul className="mt-12 space-y-6">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          <Card posts={posts} />
         </ul>
         <div className="mt-7 flex justify-center">
           <LoadCardsBtn
@@ -58,4 +48,16 @@ export default function Home() {
       </main>
     </>
   )
+}
+
+
+export const getServerSideProps = async () => {
+
+  const { data } = await axios.get(`${url}/api/posts`)
+
+  return {
+    props: {
+      posts: data.posts
+    }
+  }
 }
