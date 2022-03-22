@@ -87,7 +87,7 @@ const index = ({ user, id }) => {
             details: ""
         })
         
-        if (title.length < 20) setErrosFunc({title: "Title should not be less than 20 characters"})
+        if (title.length < 10) setErrosFunc({title: "Title should not be less than 20 characters"})
         else if (phone.length < 8) setErrosFunc({phone: "Phone number should not be less than 8 numbers"})
         else if (!validator.validate(email)) setErrosFunc({email: "Please enter correct email"})
         else if (!aid) setErrosFunc({aid: "Please select aid type"})

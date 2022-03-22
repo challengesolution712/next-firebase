@@ -13,7 +13,7 @@ export default ({ menuItems, disabledItem, onChange, defaultValue }) => {
                     </option>
                     {
                         menuItems.map((item, idx) => (
-                            <option selected value={item} key={idx}>
+                            <option value={item} key={idx}>
                                 { item }
                             </option>
                         ))

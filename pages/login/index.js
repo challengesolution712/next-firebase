@@ -10,9 +10,11 @@ import jsCookie from "js-cookie"
 import Head from "next/head"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import login from "../../Firebase/login"
 import Auth from "../../components/ProtectedRoute/Auth"
 import FormLayout from "../../components/ProtectedRoute/FormLayout"
+import axios from "axios"
+import { jwtSign } from "../../auth/jwt"
+import { setTokenCookie } from "../../auth/cookies"
 
 const index = ({ user }) => {
 
@@ -41,16 +43,32 @@ const index = ({ user }) => {
         else if (password.length < 8) setPassErr("Password should not be less than 8 character")
         else {
 
-            // Back end
             setIsLoad(true)
-            login({ email, password }).then(res => {
-                const { confirmed } = res;
-                if (confirmed) {
-                    setIsLoad(false);
-                    router.push('/')
+            axios.post('/api/login', { email, password }).then( async res => {
+                const { empty, msg } = res.data
+                if (empty) {
+                    setIsLoad(false)
+                    setErrMsg(msg);
                 } else {
-                    setIsLoad(false);
-                    setErrMsg("Sorry! Your Email or Password is incorrect");
+                    
+                    setIsLoad(false)
+
+                    setEmail("")
+                    setPassword("")
+
+                    const auth = {
+                        user: {
+                            id: res.data.id,
+                            ...res.data.user
+                        },
+                        loggedIn: true
+                    }
+        
+                    const token = await jwtSign(auth)
+                    
+                    await setTokenCookie(token)
+        
+                    await router.push(`/dashboard/${res.data.id}`)
                 }
             })
         }
@@ -87,6 +105,7 @@ const index = ({ user }) => {
                             className="w-full"
                             type="email"
                             placeholder="Enter your email"
+                            value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
                         <Error>
@@ -101,6 +120,7 @@ const index = ({ user }) => {
                             className="w-full"
                             type="password"
                             placeholder="Enter your password"
+                            value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
                         <Error>
