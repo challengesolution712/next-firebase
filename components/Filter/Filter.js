@@ -10,7 +10,7 @@ export default () => {
     const router = useRouter()
 
     const menuItems = countries
-    const menuItems2 = ["Scholarships", "Volunteer mentor", "Volunteer instructor", "Financial Aid"]
+    const menuItems2 = ["Scholarships", "Volunteer instructor", "Financial Aid"]
 
     const [selectedItem, setSelectedItem] = useState({
         item: null,

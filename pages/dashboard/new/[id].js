@@ -11,6 +11,7 @@ import validator from "email-validator"
 import Auth from '../../../components/ProtectedRoute/Auth'
 import Layout from '../../../components/ProtectedRoute/Layout'
 import { useRouter } from "next/router"
+import axios from "axios"
 
 const index = ({ user, id }) => {
 
@@ -36,7 +37,7 @@ const index = ({ user, id }) => {
         details: ""
     })
 
-    const aids = ["Scholarships", "Volunteer mentor", "Volunteer instructor", "Financial Aid"]
+    const aids = ["Scholarships", "Volunteer instructor", "Financial Aid"]
     
     const [cities, setCity] = useState([])
     const [selectedItem, setSelectedItem] = useState({
@@ -95,7 +96,22 @@ const index = ({ user, id }) => {
         else if (detailsWords < 50) setErrosFunc({details: "Details should not be less than 50 words"})
         else {
             
-            // Back end
+            setIsLoad(true)
+            axios.post(`/api/new/${id}`, { data: state }).then(res => {
+                if (res.data.success) {
+                    setIsLoad(false)
+                    setState({
+                        title: "",
+                        phone: "",
+                        email: "",
+                        aid: "",
+                        country: "",
+                        city: "",
+                        details: ""
+                    })
+                    router.push('/dashboard/'+id)
+                }
+            })
         }
 
     }
