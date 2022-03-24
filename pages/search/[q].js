@@ -1,15 +1,23 @@
 import Head from 'next/head'
 import { useState } from 'react'
-import Card from '../components/Card/Card'
-import Filter from '../components/Filter/Filter'
+import Card from '../../components/Card/Card'
+import Filter from '../../components/Filter/Filter'
 // import LoadCardsBtn from '../components/LoadCardsBtn/LoadCardsBtn'
 import { useRouter } from 'next/router'
-import axios from 'axios'
-import url from '../url/url'
+import useSWR from 'swr'
+import url from '../../url/url'
 
-export default function Home({ posts }) {
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
-  const router = useRouter()
+const index = ({ query }) => {
+
+    
+    const router = useRouter()
+
+    const { data, error } = useSWR(`/api${router.asPath}`, fetcher)
+
+    console.log(data);
+
 
   // const [isLoad, setIsLoad] = useState(false)
 
@@ -37,7 +45,7 @@ export default function Home({ posts }) {
         </div>
         <Filter />
         <ul className="mt-12 space-y-6">
-          <Card posts={posts} />
+          {/* <Card posts={posts} /> */}
         </ul>
         <div className="mt-7 flex justify-center">
           {/* <LoadCardsBtn
@@ -50,14 +58,8 @@ export default function Home({ posts }) {
   )
 }
 
-
-export const getServerSideProps = async () => {
-
-  const { data } = await axios.get(`${url}/api/posts`)
-
-  return {
-    props: {
-      posts: data.posts
-    }
-  }
+index.getInitialProps = ({ query }) => {
+    return { query }
 }
+
+export default index
