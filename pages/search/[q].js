@@ -5,7 +5,10 @@ import Filter from '../../components/Filter/Filter'
 // import LoadCardsBtn from '../components/LoadCardsBtn/LoadCardsBtn'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
-import url from '../../url/url'
+import TextLoading from '../../components/TextLoading/TextLoading'
+import FetchDataAlert from '../../components/FetchDataAlert/FetchDataAlert'
+import Button from '../../components/Button/Button'
+import Link from 'next/link'
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
@@ -45,7 +48,25 @@ const index = ({ query }) => {
         </div>
         <Filter />
         <ul className="mt-12 space-y-6">
-          {/* <Card posts={posts} /> */}
+          {
+            !data ? <TextLoading /> : (
+              data.posts.length > 0 ? <Card posts={data.posts} /> : (
+                <>
+                  <FetchDataAlert info="Sorry, we couldn't find the page you're looking for." />
+                  <div className="flex justify-center">
+                    <Link href="/">
+                        <a className="mt-2 flex items-center justify-center text-blue-600 font-semibold">
+                            Go back home
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                            </svg>
+                        </a>
+                    </Link>
+                  </div>
+                </>
+              )
+            )
+          }
         </ul>
         <div className="mt-7 flex justify-center">
           {/* <LoadCardsBtn
