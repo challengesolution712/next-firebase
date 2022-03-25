@@ -4,6 +4,7 @@ import SelectMenu from "../SelectMenu/SelectMenu"
 import SelectMenuSearch from "../SelectMenuSearch/SelectMenuSearch"
 import countries from "../../countries/countries"
 import countriesCities from "../../countries/countriesCities.json"
+import Link from "next/link"
 
 export default () => {
 
@@ -111,6 +112,17 @@ export default () => {
                     />
                 </div>
             </form>
+            <div className="mt-5">
+                {
+                    router.pathname != '/' ? (
+                    <Link href="/">
+                        <a className="px-8 py-3 text-white bg-indigo-600 hover:bg-indigo-700 rounded-md">
+                            Reset
+                        </a>
+                    </Link>
+                    ) : ''
+                }
+            </div>
         </div>
     )
 }

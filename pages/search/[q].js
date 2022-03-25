@@ -12,7 +12,7 @@ import Link from 'next/link'
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
-const index = ({ query }) => {
+const index = () => {
 
     
     const router = useRouter()
@@ -47,6 +47,7 @@ const index = ({ query }) => {
           </p>
         </div>
         <Filter />
+
         <ul className="mt-12 space-y-6">
           {
             !data ? <TextLoading /> : (
@@ -77,10 +78,6 @@ const index = ({ query }) => {
       </main>
     </>
   )
-}
-
-index.getInitialProps = ({ query }) => {
-    return { query }
 }
 
 export default index
