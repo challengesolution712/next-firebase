@@ -35,9 +35,14 @@ export default function Home({ posts }) {
           </p>
         </div>
         <Filter />
-        <ul className="mt-12 space-y-6">
-          <Card posts={posts} />
-        </ul>
+        <div>
+          <h3 className="text-2xl text-gray-800 font-semibold">
+            All posts
+          </h3>
+          <ul className="mt-12 space-y-6">
+            <Card posts={posts} />
+          </ul>
+        </div>
         <div className="mt-7 flex justify-center">
           {/* <LoadCardsBtn
             isLoad={isLoad}
