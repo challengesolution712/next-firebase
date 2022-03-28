@@ -33,7 +33,7 @@ export default (props) => {
       else body.classList.remove(...customBodyStyle)
 
       // Sticky strick
-      const customStyle = ["sticky-nav", "fixed", "border-b"]
+      const customStyle = ["sticky-nav", "fixed"]
       window.onscroll = () => {
           if (window.scrollY > 550) navRef.current.classList.add(...customStyle)
           else navRef.current.classList.remove(...customStyle)
