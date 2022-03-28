@@ -139,11 +139,12 @@ export default (props) => {
                                 </Link>
                             </li>
                             <li className="nav-item text-gray-600 hover:text-indigo-600">
-                                <Link href="/about">
-                                    <a className="block">
-                                        Support
-                                    </a>
-                                </Link>
+                                <a 
+                                    className="block"
+                                    href="mailto:studentsaids1@gmail.com"
+                                >
+                                    Support
+                                </a>
                             </li>
                             <ProtectedLink isLoggedIn={user?.loggedIn}>                                
                                 <li className="nav-item text-gray-600 hover:text-indigo-600">
