@@ -20,7 +20,7 @@ export default function Home({ posts }) {
   return (
     <>
       <Head>
-        <title>Students aids</title>
+        <title>Help student</title>
         <meta name="description" content="Our mission is to build the future of humanity. We are committed to help millions of people, who are unable to get an education." />
       </Head>
 
