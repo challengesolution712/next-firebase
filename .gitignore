@@ -30,7 +30,7 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
-# Ignore .env file
+# Ignore .env files
 .env
 
 # vercel

@@ -1,5 +1,4 @@
 import mail from '@sendgrid/mail'
-require('dotenv').config();
 
 export default ({ to, subject, text, html }) => {
     
