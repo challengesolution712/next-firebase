@@ -15,13 +15,6 @@ export default (props) => {
     const toekn = getCookie('token')
     const [user, setUser] = useState(null)
 
-  // Replace javascript:void(0) path with your path
-  const navigation = [
-      { title: "Home", path: "/" },
-      { title: "About us", path: "/about" },
-      { title: "Dashboard", path: "/dashboard/sdfsgfdddssadgdghf" },
-  ]
-
     useEffect(() => {
       
       const body = document.body
@@ -141,7 +134,7 @@ export default (props) => {
                             <li className="nav-item text-gray-600 hover:text-indigo-600">
                                 <a 
                                     className="block"
-                                    href="mailto:studentsaids1@gmail.com"
+                                    href="mailto:support@helpstudent.org"
                                 >
                                     Support
                                 </a>

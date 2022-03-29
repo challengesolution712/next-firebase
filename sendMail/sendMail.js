@@ -1,8 +1,9 @@
 import mail from '@sendgrid/mail'
+require('dotenv').config();
 
 export default ({ to, subject, text, html }) => {
     
-    mail.setApiKey("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")
+    mail.setApiKey(process.env.API_KEY)
     
     return new Promise((resolve, reject) => {
 
