@@ -42,7 +42,7 @@ export default () => {
                     setPassword("")
                     setTimeout(() => {
                         router.push('/login')
-                    }, 1000)
+                    }, 1500)
                 }
             })
         }

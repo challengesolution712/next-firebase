@@ -25,6 +25,8 @@ export default () => {
         e.preventDefault()
 
         setEmailErr("")
+        setInfoMsg("")
+        setErrMsg("")
 
         if (!validator.validate(email)) setEmailErr("Please enter correct email")
         else {
