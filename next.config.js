@@ -13,4 +13,8 @@ module.exports = {
     EXP: 3,
     EMAIL: process.env.EMAIL
   },
+  i18n: {
+    locales: ['en', 'ar'],
+    defaultLocale: 'en'
+  }
 }

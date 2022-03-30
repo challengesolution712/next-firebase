@@ -6,10 +6,14 @@ import Filter from '../components/Filter/Filter'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import url from '../url/url'
+import { useMenuContext } from '../context/contextApp'
+import { homeHeader } from '../dictionary/dictionary'
 
 export default function Home({ posts }) {
 
   const router = useRouter()
+  const { locale } = useMenuContext()
+  const home = homeHeader[locale]
 
   // const [isLoad, setIsLoad] = useState(false)
 
@@ -28,16 +32,16 @@ export default function Home({ posts }) {
       <main className="mt-24 mb-5 mx-auto px-4 max-w-screen-lg lg:px-8">
         <div className="text-center max-w-xl mx-auto">
           <h1 className="text-4xl font-semibold">
-            Help a student to continue his studies.
+            { home.title }
           </h1>
           <p className="mt-3 text-gray-500">
-            Do you want to create a huge impact in the world? So let's build the future, by helping students to fund their needs, and get the mentorship they need in order to take them to the next level.
+            { home.desc }
           </p>
         </div>
         <Filter />
         <div>
           <h3 className="text-2xl text-gray-800 font-semibold">
-            All posts
+            { home.title2 }
           </h3>
           <ul className="mt-12 space-y-6">
             <Card posts={posts} />

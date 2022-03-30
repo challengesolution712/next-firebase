@@ -5,12 +5,17 @@ import SelectMenuSearch from "../SelectMenuSearch/SelectMenuSearch"
 import countries from "../../countries/countries"
 import countriesCities from "../../countries/countriesCities.json"
 import Link from "next/link"
+import { filter } from '../../dictionary/dictionary'
+import { useMenuContext } from '../../context/contextApp'
 
 export default () => {
 
     const router = useRouter()
+    
+    const { locale } = useMenuContext()
+    const filterLang = filter[locale]
 
-    const aids = ["Scholarships", "Volunteer instructor", "Financial Aid"]
+    const aids = filterLang.aids
     const [cities, setCity] = useState(null)
 
     const [selectedItem, setSelectedItem] = useState({
@@ -78,7 +83,7 @@ export default () => {
             >
                 <div className="flex-1">
                     <label className="block py-3 text-gray-600">
-                        Country
+                        { filterLang.label1 }
                     </label>
                     <SelectMenuSearch
                         menuItems={countries}
@@ -90,10 +95,10 @@ export default () => {
                     cities?.length > 0 ? (
                         <div className="flex-1">
                             <label className="block py-3 text-gray-600">
-                                City
+                                { filterLang.label3 }
                             </label>
                             <SelectMenu
-                                defaultValue={router.query.city || "Select a city"}
+                                disabledItem={router.query.city || filterLang.selectedItem1}
                                 menuItems={cities}
                                 onChange={handleCity}
                             />
@@ -102,11 +107,11 @@ export default () => {
                 }
                 <div className="flex-1">
                     <label className="block py-3 text-gray-600">
-                        Type of aid
+                        { filterLang.label2 }
                     </label>
                     <SelectMenu
-                        disabledItem="Type"
-                        defaultValue={router.query.aid || "Type"}
+                        disabledItem={ filterLang.selectedItem2 }
+                        defaultValue={router.query.aid || filterLang.selectedItem2}
                         menuItems={aids}
                         onChange={handleAid}
                     />
@@ -116,8 +121,8 @@ export default () => {
                 {
                     router.pathname != '/' ? (
                     <Link href="/">
-                        <a className="px-8 py-3 text-white bg-indigo-600 hover:bg-indigo-700 rounded-md">
-                            Reset
+                        <a className={`px-8 ${locale == 'ar' ? 'py-2' : 'py-3'} text-white bg-indigo-600 hover:bg-indigo-700 rounded-md`}>
+                            { filterLang.reset }
                         </a>
                     </Link>
                     ) : ''

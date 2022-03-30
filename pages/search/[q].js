@@ -8,6 +8,8 @@ import useSWR from 'swr'
 import TextLoading from '../../components/TextLoading/TextLoading'
 import FetchDataAlert from '../../components/FetchDataAlert/FetchDataAlert'
 import Button from '../../components/Button/Button'
+import { useMenuContext } from '../../context/contextApp'
+import { homeHeader } from '../../dictionary/dictionary'
 import Link from 'next/link'
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
@@ -19,7 +21,8 @@ const index = () => {
 
     const { data, error } = useSWR(`/api${router.asPath}`, fetcher)
 
-    console.log(data);
+    const { locale } = useMenuContext()
+    const home = homeHeader[locale]
 
 
   // const [isLoad, setIsLoad] = useState(false)
@@ -40,14 +43,17 @@ const index = () => {
       <main className="mt-24 mb-5 mx-auto px-4 max-w-screen-lg lg:px-8">
         <div className="text-center max-w-xl mx-auto">
           <h1 className="text-4xl font-semibold">
-            Help a student to continue his studies.
+            { home.title }
           </h1>
           <p className="mt-3 text-gray-500">
-            Do you want to create a huge impact in the world? So let's build the future, by helping students to fund their needs, and get the mentorship they need in order to take them to the next level.
+            { home.desc }
           </p>
         </div>
         <Filter />
 
+        <h3 className="text-2xl text-gray-800 font-semibold">
+          { locale == 'ar' ? 'نتائج البحث' : 'Search results' }
+        </h3>
         <ul className="mt-12 space-y-6">
           {
             !data ? <TextLoading /> : (
@@ -57,7 +63,7 @@ const index = () => {
                   <div className="flex justify-center">
                     <Link href="/">
                         <a className="mt-2 flex items-center justify-center text-blue-600 font-semibold">
-                            Go back home
+                          { locale == 'ar' ? 'الرجوع للرئيسية' : 'Go back home' }
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
                                 <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                             </svg>
