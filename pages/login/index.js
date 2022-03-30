@@ -127,6 +127,11 @@ const index = ({ user }) => {
                             {passErr}
                         </Error>
                     </div>
+                    <Link href="/forget">
+                        <a className="text-indigo-600">
+                            Forget your password?
+                        </a>
+                    </Link>
                     <div>
                         <Button
                             type="submit"

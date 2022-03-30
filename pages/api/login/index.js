@@ -5,7 +5,7 @@ export default (req, res) => {
 
     const q = query(collection(db, 'users'), where('email', '==', email))
     getDocs(q).then(querySnapshot => {
-        if (querySnapshot.empty) res.json({ empty: true, msg: "This account is not exist! Please make sure this account is correct" })
+        if (querySnapshot.empty) res.json({ empty: true, msg: "This account does not exist! Please make sure this account is correct" })
         else {
             const user = querySnapshot.docs[0].data()
             if (user.password == password) {

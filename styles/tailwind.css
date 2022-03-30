@@ -3,7 +3,16 @@
 @tailwind utilities;
 
 body {
-    @apply bg-gray-50 font-sans;
+    @apply bg-gray-50;
+}
+
+
+.en-font {
+    @apply font-sans;
+}
+
+.ar-font {
+    font-family: 'Noto Kufi Arabic', sans-serif;
 }
 
 .sticky-nav {
@@ -44,5 +53,22 @@ body {
     }
     100% {
         @apply left-[1.9rem];
+    }
+}
+
+/* AR TEXT LOADING */
+
+.ar-text-loading .dote-container::after {
+    content: '';
+    @apply absolute w-7 h-full bg-gray-50;
+    animation: dote-move-ar 1s infinite !important;
+}
+
+@keyframes dote-move-ar {
+    0% {
+        @apply right-0;
+    }
+    100% {
+        @apply right-[1.9rem];
     }
 }

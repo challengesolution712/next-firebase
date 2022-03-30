@@ -1,6 +1,11 @@
 import { useState } from "react"
+import { filter } from '../../dictionary/dictionary'
+import { useMenuContext } from '../../context/contextApp'
 
 export default ({ menuItems, selectedItem, setSelectedItem }) => {
+
+    const { locale } = useMenuContext()
+    const filterLang = filter[locale]
 
     const [state, setState] = useState(false)
 
@@ -22,7 +27,7 @@ export default ({ menuItems, selectedItem, setSelectedItem }) => {
                 onClick={() => setState(!state)}
             >
                 <p className="line-clamp-1 text-left">
-                    { selectedItem.item || "Select a country" }
+                    { selectedItem.item || filterLang.selectedItem1 }
                 </p>
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
@@ -39,7 +44,7 @@ export default ({ menuItems, selectedItem, setSelectedItem }) => {
                                 </svg>
                                 <input 
                                     type="text" 
-                                    placeholder="Search"
+                                    placeholder={locale == 'ar' ? 'البحث' : 'Search'}
                                     className="p-2 text-gray-500 w-full rounded-md outline-none"
                                     onInput={handleSearch}
                                 />

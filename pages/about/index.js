@@ -13,15 +13,21 @@ export default () => (
                 <h1 className="text-3xl text-gray-900 font-semibold">
                     On a mission to help students
                 </h1>
-                <p className="max-w-lg mt-8 text-[17px] text-gray-400 leading-relaxed">
-                    Our mission is to build the future of humanity. We are committed to help millions of people, who are unable to get an education.
-                    <br />
-                    <br />
-                    And we are here to make the changes, and make the world a better place.
-                </p>
-                <p className="mt-5 text-gray-600 text-lg font-medium" style={{ wordSpacing: '30px' }}>
-                    Let's build the future
-                </p>
+
+                <div className="max-w-lg mt-8 text-[17px] text-gray-400 leading-relaxed space-y-3">
+                    <p>
+                        Students aids program is built to help students who are unable to continue their studies, for some reason, to report their problems, and the organizations, volunteers start help them, even the organizations can share offers, or something like that to help the students.
+                    </p>
+                    <p>
+                        Our mission is to build the future of humanity. We are committed to help millions of people, who are unable to get an education.
+                    </p>
+                    <p>
+                        And we are here to make the changes, and make the world a better place.
+                    </p>
+                    <p className="mt-5 text-gray-600 text-lg font-medium" style={{ wordSpacing: '30px' }}>
+                        Let's build the future
+                    </p>
+                </div>
             </div>
         </section>
 

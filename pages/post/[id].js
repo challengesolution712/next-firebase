@@ -24,7 +24,7 @@ export default ({ post, empty }) => {
             <div className="bg-white shadow rounded-md">            
                 <div className="p-4 py-5 border-b sm:px-8">
                     <span className="text-gray-800 text-lg font-medium">
-                        Student Aid
+                        Post details
                     </span>
                     <p className="mt-1 text-gray-500">
                         More information and details about the post
