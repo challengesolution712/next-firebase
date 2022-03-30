@@ -73,7 +73,7 @@ const index = ({ user, id }) => {
                             !data ? <TextLoading doteBg="bg-white" /> : (
                                 data.empty ? (
                                     <FetchDataAlert 
-                                        info="You have not create any post yet!"
+                                        info="You have not created any post yet!"
                                     />
                                 ) : (
                                     <ul className="mt-12 space-y-14">
