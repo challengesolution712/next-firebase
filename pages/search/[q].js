@@ -51,7 +51,7 @@ const index = () => {
         </div>
         <Filter />
 
-        <h3 className="text-2xl text-gray-800 font-semibold">
+        <h3 className="mt-12 text-2xl text-gray-800 font-semibold">
           { locale == 'ar' ? 'نتائج البحث' : 'Search results' }
         </h3>
         <ul className="mt-12 space-y-6">
@@ -59,12 +59,12 @@ const index = () => {
             !data ? <TextLoading /> : (
               data.posts.length > 0 ? <Card posts={data.posts} /> : (
                 <>
-                  <FetchDataAlert info="Sorry, we couldn't find the page you're looking for." />
+                  <FetchDataAlert info={locale == 'ar' ? 'عذرا, لم نتمكن من ايجاد ماتبحث عنه' : "Sorry, we couldn't find what you're looking for."} />
                   <div className="flex justify-center">
                     <Link href="/">
-                        <a className="mt-2 flex items-center justify-center text-blue-600 font-semibold">
+                        <a className={`${locale == 'ar' ? ' flex-row-reverse' : ''} mt-2 flex items-center justify-center text-blue-600 font-semibold`}>
                           { locale == 'ar' ? 'الرجوع للرئيسية' : 'Go back home' }
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mx-1" viewBox="0 0 20 20" fill="currentColor">
                                 <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                             </svg>
                         </a>

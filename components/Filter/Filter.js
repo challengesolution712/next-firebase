@@ -98,7 +98,7 @@ export default () => {
                                 { filterLang.label3 }
                             </label>
                             <SelectMenu
-                                disabledItem={router.query.city || filterLang.selectedItem1}
+                                disabledItem={router.query.city || filterLang.selectedItem3}
                                 menuItems={cities}
                                 onChange={handleCity}
                             />
