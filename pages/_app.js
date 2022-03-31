@@ -13,7 +13,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
     <Head>
-      <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500&display=swap" rel="stylesheet" />    </Head>
+      <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500&display=swap" rel="stylesheet" />    
+    </Head>
+    
     <MenuProvider value={{
       locale,
       path: router.asPath
