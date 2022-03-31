@@ -46,7 +46,7 @@ const index = ({ user, id }) => {
 
     const [infoMsg, setInfoMsg] = useState("")
 
-    const aids = ["Scholarships", "Volunteer instructor", "Financial Aid"]
+    const aids = filter[locale].aids
     
     const [cities, setCity] = useState([])
     const [selectedItem, setSelectedItem] = useState({
