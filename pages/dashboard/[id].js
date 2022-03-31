@@ -78,11 +78,7 @@ const index = ({ user, id }) => {
                             !data ? <TextLoading doteBg="bg-white" /> : (
                                 data.empty ? (
                                     <FetchDataAlert 
-<<<<<<< HEAD
-                                        info="You have not created any post yet!"
-=======
                                         info={locale == 'ar' ? 'لم تقم بنشر أي منشور بعد!' : "You have not create any post yet!"}
->>>>>>> Complete translate
                                     />
                                 ) : (
                                     <ul className="mt-12 space-y-14">
