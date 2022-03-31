@@ -38,16 +38,16 @@ export default () => {
 
             setIsLoad(true)
 
-            axios.post('/api/forget', { email, url }).then(res => {
+            axios.post('/api/forget', { email, url, locale }).then(res => {
                 const { success, msg } = res.data
 
                 setIsLoad(false)
 
                 if (success) {
-                    setInfoMsg(msg)
+                    setInfoMsg(msg[locale])
                     setEmail("")
                 }
-                else setErrMsg(msg)
+                else setErrMsg(msg[locale])
                 
             })
         }
@@ -67,7 +67,7 @@ export default () => {
             {
                 infoMsg.length != 0 ? (
                     <InfoAlert
-                        title="إعادة كلمة السر"
+                        title={locale == 'ar' ? "إعادة كلمة السر" : "Reset password"}
                         msg={infoMsg}
                         onClick={() => setInfoMsg("")}
                     />

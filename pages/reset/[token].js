@@ -40,7 +40,7 @@ export default () => {
             axios.post(`/api/reset/${router.query.token}/?id=${router.query.id}`, { password }).then( async res => {
                 if (res.data.updated) {
                     
-                    setInfoMsg(res.data.msg)
+                    setInfoMsg(res.data.msg[locale])
                     setIsLoad(false)
                     document.getElementById('info-alert')
                     .scrollIntoView({behavior: "smooth"})
@@ -70,7 +70,7 @@ export default () => {
                 {
                     infoMsg.length != 0 ? (
                         <InfoAlert
-                            title="Reset password"
+                            title={locale == 'ar' ? "تغيير كلمة السر" : "Reset password"}
                             msg={infoMsg}
                             onClick={() => setInfoMsg("")}
                         />

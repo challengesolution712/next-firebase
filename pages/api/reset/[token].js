@@ -22,7 +22,10 @@ export default (req, res) => {
             password,
             token: tokgen.generate()
         }).then(() => {
-            res.json({ updated: true, msg: "Your password updated successfuly" })
+            res.json({ updated: true, msg: {
+                ar: "تم تغييير كلمة السر بنجاح",
+                en: "Your password updated successfuly"
+            }})
         })
     }
 }

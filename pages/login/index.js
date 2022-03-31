@@ -53,7 +53,7 @@ const index = ({ user }) => {
                 const { empty, msg } = res.data
                 if (empty) {
                     setIsLoad(false)
-                    setErrMsg(msg);
+                    setErrMsg(msg[locale]);
                 } else {
                     
                     setIsLoad(false)
