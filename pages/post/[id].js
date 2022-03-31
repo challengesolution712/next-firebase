@@ -1,12 +1,20 @@
 import Head from "next/head"
 import moment from "moment"
+import 'moment/locale/ar'
+import 'moment/locale/en-nz'
 import Link from "next/link"
 import axios from "axios";
 import url from '../../url/url'
 import { useRouter } from "next/router";
 import Page404 from '../../components/Page404/Page404'
+import { useMenuContext } from '../../context/contextApp'
+import { post as postTranslate } from '../../dictionary/dictionary'
 
 export default ({ post, empty }) => {
+
+    const { locale } = useMenuContext()
+    const postTrans = postTranslate[locale]
+    moment.locale(locale)
 
     const router = useRouter()
 
@@ -24,10 +32,10 @@ export default ({ post, empty }) => {
             <div className="bg-white shadow rounded-md">            
                 <div className="p-4 py-5 border-b sm:px-8">
                     <span className="text-gray-800 text-lg font-medium">
-                        Post details
+                        { postTrans.headerTitle }
                     </span>
                     <p className="mt-1 text-gray-500">
-                        More information and details about the post
+                        { postTrans.headerDesc }
                     </p>
                 </div>
                 <article className="px-4 py-8 sm:px-8">
@@ -62,7 +70,7 @@ export default ({ post, empty }) => {
                     </div>
                     <div className="mt-10">
                         <h3 className="text-xl text-gray-800 font-medium">
-                            Details
+                            { postTrans.details }
                         </h3>
 
                         <p className="max-w-screen-md text-gray-500 leading-relaxed mt-3">
@@ -71,26 +79,26 @@ export default ({ post, empty }) => {
                     </div>
                     <div className="mt-10 justify-between items-center max-w-screen-md sm:flex">
                         <span className=" text-gray-800 font-medium">
-                            Contact the author for more details and to help.
+                            { postTrans.footerDesc }
                         </span>
                         <div className="items-center gap-2 sm:flex">
                             <a 
-                                className="w-full inline-flex items-center justify-center mt-3 py-2.5 px-3 border shadow rounded-md text-gray-500 sm:mt-0"
+                                className="w-full inline-flex flex-row-reverse items-center justify-center mt-3 py-2.5 px-3 border shadow rounded-md text-gray-500 sm:mt-0"
                                 href={`mailto:${post.email}`}>
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                { postTrans.message }
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mx-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
                                     <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                                     <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                                 </svg>
-                                Message
                             </a>
 
                             <a 
-                                className="w-full inline-flex items-center justify-center mt-3 py-2.5 px-3 border shadow rounded-md text-gray-500 sm:mt-0"
+                                className="w-full inline-flex flex-row-reverse items-center justify-center mt-3 py-2.5 px-3 border shadow rounded-md text-gray-500 sm:mt-0"
                                 href={`tel:${post.phone}`}>
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                { postTrans.call }
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mx-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
                                     <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                                 </svg>
-                                Call
                             </a>
                         </div>
                     </div>
@@ -98,11 +106,20 @@ export default ({ post, empty }) => {
             </div>
             <div className="md:mx-4 lg:mx-0">
                 <Link href="/">
-                    <a className="mt-10 inline-flex items-center py-3 px-8 shadow drop-shadow-xl rounded-md bg-indigo-600 text-white hover:bg-indigo-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M11 17l-5-5m0 0l5-5m-5 5h12" />
-                        </svg>
-                        Back
+                    <a className={`flex-row-reverse mt-10 inline-flex items-center py-3 px-8 shadow drop-shadow-xl rounded-md bg-indigo-600 text-white hover:bg-indigo-700`}>
+                        { postTrans.back }
+                        {
+                            locale == 'ar' ? (
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                                </svg>
+
+                            ) : (
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M11 17l-5-5m0 0l5-5m-5 5h12" />
+                                </svg>
+                            )
+                        }
                     </a>
                 </Link>
             </div>

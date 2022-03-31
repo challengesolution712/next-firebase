@@ -8,8 +8,13 @@ import Loading from "../../components/Loading/Loading"
 import { useRouter } from "next/router"
 import TextLoading from '../../components/TextLoading/TextLoading'
 import InfoAlert from "../../components/Alerts/InfoAlert"
+import { useMenuContext } from '../../context/contextApp'
+import { reset } from '../../dictionary/dictionary'
 
 export default () => {
+
+    const { locale } = useMenuContext()
+    const resetTrans = reset[locale]
 
     const router = useRouter()
 
@@ -27,7 +32,7 @@ export default () => {
 
         setPassErr("")
 
-        if (password.length < 8) setPassErr("Password should not be less than 8 character")
+        if (password.length < 8) setPassErr(resetTrans.passwordE)
         else {
 
             setIsLoad(true)
@@ -79,18 +84,18 @@ export default () => {
                     </Head>
                     <div className="mx-4 px-4 py-8 bg-white rounded-md shadow-md">
                         <h2 className="text-3xl font-semibold text-center py-4">
-                            Reset password
+                            { resetTrans.title }
                         </h2>
 
                         <form onSubmit={handleSubmit}>
                             <div>
                                 <label className="text-gray-500 py-3 block">
-                                    New password
+                                    { resetTrans.passwordL }
                                 </label>
                                 <Input
                                     className="w-full"
                                     type="password"
-                                    placeholder="Enter your new password"
+                                    placeholder={ resetTrans.password }
                                     onChange={(e) => setPassword(e.target.value)}
                                     value={password}
                                 />
@@ -108,7 +113,7 @@ export default () => {
                                             <Loading />
                                         ) : ''
                                     }
-                                    Reset
+                                    { resetTrans.submit }
                                 </Button>
                             </div>
                         </form>

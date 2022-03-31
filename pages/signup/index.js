@@ -13,9 +13,13 @@ import Link from "next/link"
 import axios from "axios"
 import Auth from "../../components/ProtectedRoute/Auth"
 import FormLayout from "../../components/ProtectedRoute/FormLayout"
-
+import { useMenuContext } from '../../context/contextApp'
+import { signup } from '../../dictionary/dictionary'
 
 const index = ({ user }) => {
+
+    const { locale } = useMenuContext()
+    const signupTrans = signup[locale]
 
     const tokgen = new TokenGenerator(256, TokenGenerator.BASE62)
 
@@ -43,9 +47,9 @@ const index = ({ user }) => {
         setErrMsg("")
         setInfoMsg("")
 
-        if (!validator.validate(email)) setEmailErr("Please enter correct email")
-        else if (password.length < 8) setPassErr("Password should not be less than 8 character")
-        else if (!selecedtItem) setSelecedtItemErr("Please select a role")
+        if (!validator.validate(email)) setEmailErr(signupTrans.emailE)
+        else if (password.length < 8) setPassErr(signupTrans.passwordE)
+        else if (!selecedtItem) setSelecedtItemErr(signupTrans.roleE)
         else {
 
             setIsLoad(true)
@@ -76,12 +80,12 @@ const index = ({ user }) => {
         }
     }
 
-    const menuItems = ["Student", "Organization", "Mentor"]
+    const menuItems = signupTrans.roleItems
 
     return (
         <FormLayout data={user}>
             <Head>
-                <title>Sign up</title>
+                <title>{ signupTrans.title }</title>
             </Head>
 
 
@@ -97,7 +101,7 @@ const index = ({ user }) => {
             {
                 infoMsg.length != 0 ? (
                     <InfoAlert
-                        title="Email confirmation"
+                        title={locale == 'ar' ? 'تأكيد البريد اﻹلكتروني' : 'Email confirmation'}
                         msg={infoMsg}
                         onClick={() => setInfoMsg("")}
                     />
@@ -106,20 +110,20 @@ const index = ({ user }) => {
 
             <div className="mt-24 max-w-2xl mx-4 p-4 bg-white rounded-md shadow sm:p-8 sm:mx-auto">
                 <h2 className="text-3xl font-semibold text-center py-4">
-                    Sign up
+                    { signupTrans.title }
                 </h2>
                 <form
                     onSubmit={handleSubmit}
                     className="space-y-3">
                     <div>
                         <label className="text-gray-500 py-3 block">
-                            Email
+                            { signupTrans.emailL }
                         </label>
                         <Input
                             value={email}
                             className="w-full"
                             type="email"
-                            placeholder="Enter your email"
+                            placeholder={signupTrans.email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
                         <Error>
@@ -128,13 +132,13 @@ const index = ({ user }) => {
                     </div>
                     <div>
                         <label className="text-gray-500 py-3 block">
-                            Password
+                            { signupTrans.passwordL }
                         </label>
                         <Input
                             value={password}
                             className="w-full"
                             type="password"
-                            placeholder="Enter your password"
+                            placeholder={ signupTrans.password }
                             onChange={(e) => setPassword(e.target.value)}
                         />
                         <Error>
@@ -143,11 +147,11 @@ const index = ({ user }) => {
                     </div>
                     <div>
                         <label className="text-gray-500 py-3 block">
-                            Role
+                            { signupTrans.roleL }
                         </label>
                         <SelectMenu
                             value={selecedtItem}
-                            disabledItem="Select your role"
+                            disabledItem={ signupTrans.role }
                             menuItems={menuItems}
                             onChange={(e) => setSelecedtItem(e.target.value)}
                         />
@@ -158,20 +162,20 @@ const index = ({ user }) => {
                     <div>
                         <Button
                             type="submit"
-                            className="flex items-center justify-center mt-3 w-full ring-offset-2 ring-indigo-500 focus:ring-2"
+                            className="flex flex-row-reverse items-center justify-center mt-3 w-full ring-offset-2 ring-indigo-500 focus:ring-2"
                         >
+                            { signupTrans.submit }
                             {
                                 isLoad ? (
                                     <Loading />
                                 ) : ''
                             }
-                            Submit
                         </Button>
                     </div>
                     <div className="text-gray-500">
-                        Already have an account? <Link href="/login">
+                        { signupTrans.loginNote } <Link href="/login">
                             <a className="text-indigo-600">
-                                Log in
+                                { signupTrans.login }
                             </a>
                         </Link>
                     </div>

@@ -1,6 +1,9 @@
 import Loading from "../Loading/Loading"
+import { useMenuContext } from '../../context/contextApp'
 
 export default ({ title, desc, setState, onClick, loading }) => {
+
+    const { locale } = useMenuContext()
 
     return (
         <div className="fixed inset-0 z-10 overflow-y-auto">
@@ -13,7 +16,7 @@ export default ({ title, desc, setState, onClick, loading }) => {
                                 <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                             </svg>
                         </div>
-                        <div className="mt-2 text-center sm:ml-4 sm:text-left">
+                        <div className={`${locale == 'ar' ? 'sm:text-right sm:mr-4' : 'sm:text-left sm:ml-4'} mt-2 text-center`}>
                             <h4 className="text-lg font-medium text-gray-800">
                                 { title }
                             </h4>
@@ -29,12 +32,12 @@ export default ({ title, desc, setState, onClick, loading }) => {
                                             <Loading />
                                         ) : ''
                                     }
-                                    Delete
+                                    { locale == 'ar' ? 'حذف' : 'Delete' }
                                 </button>
                                 <button className={`${loading ? 'pointer-events-none' : ''} w-full mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-600 focus:ring-2`}
                                     onClick={setState}
                                 >
-                                    Cancel
+                                    { locale == 'ar' ? 'الغاء' : 'Cancel' }
                                 </button>
                             </div>
                         </div>

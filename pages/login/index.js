@@ -15,8 +15,13 @@ import FormLayout from "../../components/ProtectedRoute/FormLayout"
 import axios from "axios"
 import { jwtSign } from "../../auth/jwt"
 import { setTokenCookie } from "../../auth/cookies"
+import { useMenuContext } from '../../context/contextApp'
+import { login } from '../../dictionary/dictionary'
 
 const index = ({ user }) => {
+
+    const { locale } = useMenuContext()
+    const loginTrans = login[locale]
 
     const [isLoad, setIsLoad] = useState(false)
 
@@ -39,8 +44,8 @@ const index = ({ user }) => {
         // Error messages
         setErrMsg("")
 
-        if (!validator.validate(email)) setEmailErr("Please enter correct email")
-        else if (password.length < 8) setPassErr("Password should not be less than 8 character")
+        if (!validator.validate(email)) setEmailErr(loginTrans.emailE)
+        else if (password.length < 8) setPassErr(loginTrans.passwordE)
         else {
 
             setIsLoad(true)
@@ -92,19 +97,19 @@ const index = ({ user }) => {
 
             <div className="mt-24 max-w-2xl mx-4 p-4 bg-white rounded-md shadow sm:p-8 sm:mx-auto">
                 <h2 className="text-3xl font-semibold text-center py-4">
-                    log in
+                    { loginTrans.title }
                 </h2>
                 <form
                     onSubmit={handleSubmit}
                     className="space-y-3">
                     <div>
                         <label className="text-gray-500 py-3 block">
-                            Email
+                            { loginTrans.emailL }
                         </label>
                         <Input
                             className="w-full"
                             type="email"
-                            placeholder="Enter your email"
+                            placeholder={ loginTrans.email }
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
@@ -114,12 +119,12 @@ const index = ({ user }) => {
                     </div>
                     <div>
                         <label className="text-gray-500 py-3 block">
-                            Password
+                            { loginTrans.passwordL }
                         </label>
                         <Input
                             className="w-full"
                             type="password"
-                            placeholder="Enter your password"
+                            placeholder={ loginTrans.password }
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
@@ -129,7 +134,7 @@ const index = ({ user }) => {
                     </div>
                     <Link href="/forget">
                         <a className="text-indigo-600">
-                            Forget your password?
+                            { loginTrans.forgetNote }
                         </a>
                     </Link>
                     <div>
@@ -142,13 +147,13 @@ const index = ({ user }) => {
                                     <Loading />
                                 ) : ''
                             }
-                            Submit
+                            { loginTrans.submit }
                         </Button>
                     </div>
                     <div className="text-gray-500">
-                        Don't have an account? <Link href="/signup">
+                        { loginTrans.signupNote } <Link href="/signup">
                             <a className="text-indigo-600">
-                                Sign Up
+                                { loginTrans.signup }
                             </a>
                         </Link>
                     </div>

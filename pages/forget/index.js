@@ -9,8 +9,13 @@ import InfoAlert from "../../components/Alerts/InfoAlert"
 import ErrorAlert from "../../components/Alerts/ErrorAlert"
 import Loading from "../../components/Loading/Loading"
 import url from '../../url/url'
+import { useMenuContext } from '../../context/contextApp'
+import { forget } from '../../dictionary/dictionary'
 
 export default () => {
+
+    const { locale } = useMenuContext()
+    const forgetTrans = forget[locale]
 
     const [isLoad, setIsLoad] = useState(false)
     
@@ -28,7 +33,7 @@ export default () => {
         setInfoMsg("")
         setErrMsg("")
 
-        if (!validator.validate(email)) setEmailErr("Please enter correct email")
+        if (!validator.validate(email)) setEmailErr(forgetTrans.emailE)
         else {
 
             setIsLoad(true)
@@ -62,7 +67,7 @@ export default () => {
             {
                 infoMsg.length != 0 ? (
                     <InfoAlert
-                        title="Reset password"
+                        title="إعادة كلمة السر"
                         msg={infoMsg}
                         onClick={() => setInfoMsg("")}
                     />
@@ -77,18 +82,18 @@ export default () => {
                 </Head>
                 <div className="mx-4 px-4 py-8 bg-white rounded-md shadow-md">
                     <h2 className="text-3xl font-semibold text-center py-4">
-                        Forget password
+                        { forgetTrans.title }
                     </h2>
 
                     <form onSubmit={handleSubmit}>
                         <div>
                             <label className="text-gray-500 py-3 block">
-                                Email
+                                { forgetTrans.emailL }
                             </label>
                             <Input
                                 className="w-full"
                                 type="email"
-                                placeholder="Enter your email"
+                                placeholder={forgetTrans.email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 value={email}
                             />
@@ -106,7 +111,7 @@ export default () => {
                                         <Loading />
                                     ) : ''
                                 }
-                                Submit
+                                { forgetTrans.submit }
                             </Button>
                         </div>
                     </form>

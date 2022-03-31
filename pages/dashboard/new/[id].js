@@ -12,10 +12,16 @@ import Auth from '../../../components/ProtectedRoute/Auth'
 import Layout from '../../../components/ProtectedRoute/Layout'
 import { useRouter } from "next/router"
 import axios from "axios"
+import { useMenuContext } from '../../../context/contextApp'
+import { dashNewEdit, filter, dashNewEditFds } from '../../../dictionary/dictionary'
 
 const index = ({ user, id }) => {
 
     const router = useRouter()
+
+    const { locale } = useMenuContext()
+    const newTrans = dashNewEdit[locale]
+    const fds = dashNewEditFds[locale]
 
     const [state, setState] = useState({
         title: "",
@@ -37,7 +43,7 @@ const index = ({ user, id }) => {
         details: ""
     })
 
-    const aids = ["Scholarships", "Volunteer instructor", "Financial Aid"]
+    const aids = filter[locale].aids
     
     const [cities, setCity] = useState([])
     const [selectedItem, setSelectedItem] = useState({
@@ -88,12 +94,12 @@ const index = ({ user, id }) => {
             details: ""
         })
         
-        if (title.length < 10) setErrosFunc({title: "Title should not be less than 20 characters"})
-        else if (phone.length < 8) setErrosFunc({phone: "Phone number should not be less than 8 numbers"})
-        else if (!validator.validate(email)) setErrosFunc({email: "Please enter correct email"})
-        else if (!aid) setErrosFunc({aid: "Please select aid type"})
-        else if (!country) setErrosFunc({country: "Please select a country"})
-        else if (detailsWords < 50) setErrosFunc({details: "Details should not be less than 50 words"})
+        if (title.length < 10) setErrosFunc({title: fds.title})
+        else if (phone.length < 8) setErrosFunc({phone: fds.phone})
+        else if (!validator.validate(email)) setErrosFunc({email: fds.email})
+        else if (!aid) setErrosFunc({aid: fds.aid})
+        else if (!country) setErrosFunc({country: fds.country})
+        else if (detailsWords < 50) setErrosFunc({details: fds.details})
         else {
             
             setIsLoad(true)
@@ -123,7 +129,7 @@ const index = ({ user, id }) => {
             <div className="my-24 mx-auto px-4 max-w-screen-lg">
                 <div className="bg-white shadow rounded-md p-4">
                     <h2 className="mt-2 text-center text-gray-800 text-2xl font-medium">
-                        Create a new post
+                        { locale == 'ar' ? 'نشر منشور' : 'Create a new post'}
                     </h2>
 
                     <div className="mt-12">
@@ -134,7 +140,7 @@ const index = ({ user, id }) => {
                             <div className="grid-cols-2 gap-x-8 sm:grid">
                                 <div>
                                     <label className="text-gray-500 py-3 block">
-                                        Title
+                                        { newTrans.titleL }
                                     </label>
                                     <Input
                                         onChange={(e) => setState({
@@ -143,7 +149,7 @@ const index = ({ user, id }) => {
                                         })}
                                         className="w-full"
                                         type="text"
-                                        placeholder="Enter post title"
+                                        placeholder={newTrans.title}
                                     />
                                     <Error>
                                         { title }
@@ -151,7 +157,7 @@ const index = ({ user, id }) => {
                                 </div>
                                 <div>
                                     <label className="text-gray-500 py-3 block">
-                                        Phone number
+                                        { newTrans.phoneL }
                                     </label>
                                     <Input
                                         onChange={(e) => setState({
@@ -160,7 +166,7 @@ const index = ({ user, id }) => {
                                         })}
                                         className="w-full"
                                         type="number"
-                                        placeholder="Enter phone number"
+                                        placeholder={ newTrans.phone }
                                     />
                                     <Error>
                                         { phone }
@@ -168,7 +174,7 @@ const index = ({ user, id }) => {
                                 </div>
                                 <div>
                                     <label className="text-gray-500 py-3 block">
-                                        Email
+                                        { newTrans.emailL }
                                     </label>
                                     <Input
                                         onChange={(e) => setState({
@@ -177,7 +183,7 @@ const index = ({ user, id }) => {
                                         })}
                                         className="w-full"
                                         type="email"
-                                        placeholder="Enter email"
+                                        placeholder={ newTrans.email }
                                     />
                                     <Error>
                                         { email }
@@ -185,14 +191,14 @@ const index = ({ user, id }) => {
                                 </div>
                                 <div>
                                     <label className="text-gray-500 py-3 block">
-                                        Aid type
+                                        { newTrans.aidL }
                                     </label>
                                     <SelectMenu
                                         onChange={(e) => setState({
                                             ...state,
                                             aid: e.target.value
                                         })}
-                                        disabledItem="Type"
+                                        disabledItem={newTrans.aidSelected}
                                         menuItems={aids}
                                     />
                                     <Error>
@@ -201,7 +207,7 @@ const index = ({ user, id }) => {
                                 </div>
                                 <div>
                                     <label className="text-gray-500 py-3 block">
-                                        Country
+                                        { newTrans.countryL }
                                     </label>
                                     <SelectMenuSearch
                                         menuItems={countries}
@@ -216,14 +222,14 @@ const index = ({ user, id }) => {
                                     cities.length > 0 ? (
                                         <div>
                                             <label className="text-gray-500 py-3 block">
-                                                City
+                                                { newTrans.cityL }
                                             </label>
                                             <SelectMenu
                                                 onChange={(e) => setState({
                                                     ...state,
                                                     city: e.target.value
                                                 })}
-                                                disabledItem="Select a city"
+                                                disabledItem={newTrans.city}
                                                 menuItems={cities}
                                                 setSelectedItem={setSelectedItem}
                                             />
@@ -233,7 +239,7 @@ const index = ({ user, id }) => {
                             </div>
                             <div>
                                 <label className="text-gray-500 py-3 block">
-                                    Details
+                                    { newTrans.details }
                                 </label>
                                 <textarea
                                     onChange={(e) => setState({
@@ -241,7 +247,7 @@ const index = ({ user, id }) => {
                                         details: e.target.value
                                     })}
                                     className="outline-none border rounded-md p-3 w-full h-48"
-                                    placeholder="Please write full, clear, enough details"
+                                    placeholder={newTrans.textArea}
                                 />
                                 <Error>
                                     { details }
@@ -250,14 +256,16 @@ const index = ({ user, id }) => {
                             <div>
                                 <Button
                                     type="submit"
-                                    className="flex items-center justify-center mt-4 w-full ring-offset-2 ring-indigo-500 focus:ring-2"
+                                    className="flex flex-row-reverse items-center justify-center mt-4 w-full ring-offset-2 ring-indigo-500 focus:ring-2"
                                 >
+                                    {
+                                        locale == 'ar' ? 'نشر' : 'Create'
+                                    }
                                     {
                                         isLoad ? (
                                             <Loading />
                                         ) : ''
                                     }
-                                    Create
                                 </Button>
                             </div>
                         </form>
