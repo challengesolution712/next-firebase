@@ -1,4 +1,4 @@
-export default (url) => {
+export default (url, locale) => {
     return `
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html xmlns="https://www.w3.org/1999/xhtml">
@@ -20,12 +20,11 @@ export default (url) => {
     
         .container {
             margin: 10px;
-            text-align: left;
+            text-align: ${locale == 'ar' ? 'right' : 'left'};
         }
         
         .container p {
-            font-size: 19px;
-            text-align: left !important;
+            font-size: 17px;
         }
     
         .link {
@@ -43,10 +42,16 @@ export default (url) => {
     <body>
         <div class="container">
             <p>
-                Hello, thank you for signing up! Could you please verify your email address so we can verify that you are the person signing up?
+            ${
+                locale == 'ar' ? 
+                "مرحبا ، شكرا لك على التسجيل! هل يمكنك التحقق من عنوان بريدك الإلكتروني من فضلك حتى نتمكن من التحقق من أنك الشخص الذي قام بالتسجيل؟" :
+                "Hello, thank you for signing up! Could you please verify your email address so we can verify that you are the person signing up?" 
+        }
             </p>
             <a class="link" href=${url} target="_blank">
-                Confirm your email
+                ${
+                    locale == 'ar' ? 'تأكيد البريد اﻹلكتروني' : 'Confirm your email'
+                }
             </a>
         </div>
     </body>

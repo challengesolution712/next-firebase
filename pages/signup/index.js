@@ -63,17 +63,17 @@ const index = ({ user }) => {
                 confirmed: false
             }
 
-            axios.post("/api/signup", { data,  url: location.origin}).then(res => {
+            axios.post("/api/signup", { data,  url: location.origin, locale }).then(res => {
                 
                 const { success, msg } = res.data
                 if (success) {
-                    setInfoMsg(msg)
+                    setInfoMsg(msg[locale])
                     setIsLoad(false)
                     setEmail("")
                     setPassword("")
                     setSelecedtItem("")
                 } else {
-                    setErrMsg(msg)
+                    setErrMsg(msg[locale])
                     setIsLoad(false)
                 }
             })

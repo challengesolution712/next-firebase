@@ -99,7 +99,7 @@ const index = ({ user, id }) => {
         else if (!validator.validate(email)) setErrosFunc({email: fds.email})
         else if (!aid) setErrosFunc({aid: fds.aid})
         else if (!country) setErrosFunc({country: fds.country})
-        else if (detailsWords < 50) setErrosFunc({details: fds.details})
+        else if (detailsWords < 30) setErrosFunc({details: fds.details})
         else {
             
             setIsLoad(true)
