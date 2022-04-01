@@ -17,6 +17,5 @@ export default ({ to, subject, text, html }) => {
         }).catch(err => {
             console.log(err)
         })
-
     })
 }
