@@ -8,12 +8,17 @@ import axios from 'axios'
 import url from '../url/url'
 import { useMenuContext } from '../context/contextApp'
 import { homeHeader } from '../dictionary/dictionary'
+import GetStartedBtn from '../components/GetStartedBtn/GetStartedBtn'
+import parseCookie from '../parseCookie/parseCookie'
+import { jwtVerify } from '../auth/jwt'
 
-export default function Home({ posts }) {
+export default function Home({ posts, user }) {
 
   const router = useRouter()
   const { locale } = useMenuContext()
   const home = homeHeader[locale]
+
+  console.log(user);
 
   // const [isLoad, setIsLoad] = useState(false)
 
@@ -38,6 +43,13 @@ export default function Home({ posts }) {
             { home.desc }
           </p>
         </div>
+        {
+          user?.value?.loggedIn ? '' : (
+            <div>
+              <GetStartedBtn />
+            </div>
+          )
+        }
         <Filter />
         <div>
           <h3 className="text-2xl text-gray-800 font-semibold">
@@ -59,13 +71,17 @@ export default function Home({ posts }) {
 }
 
 
-export const getServerSideProps = async ({ locale }) => {
+export const getServerSideProps = async ({ req, locale }) => {
 
   const { data } = await axios.post(`${url}/api/posts`, { locale })
 
+  const { token } = parseCookie(req)
+  const user = token ? jwtVerify(token) : {}
+
   return {
     props: {
-      posts: data.posts
+      posts: data.posts,
+      user
     }
   }
 }

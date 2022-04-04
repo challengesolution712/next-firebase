@@ -11,10 +11,13 @@ import Button from '../../components/Button/Button'
 import { useMenuContext } from '../../context/contextApp'
 import { homeHeader } from '../../dictionary/dictionary'
 import Link from 'next/link'
+import parseCookie from '../../parseCookie/parseCookie'
+import { jwtVerify } from '../../auth/jwt'
+import GetStartedBtn from '../../components/GetStartedBtn/GetStartedBtn'
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
-const index = () => {
+const index = ({ user }) => {
 
     
     const router = useRouter()
@@ -24,6 +27,7 @@ const index = () => {
     const { locale } = useMenuContext()
     const home = homeHeader[locale]
 
+    console.log(user);
 
   // const [isLoad, setIsLoad] = useState(false)
 
@@ -49,6 +53,14 @@ const index = () => {
             { home.desc }
           </p>
         </div>
+
+        {
+          user?.value?.loggedIn ? '' : (
+            <div>
+              <GetStartedBtn />
+            </div>
+          )
+        }
         <Filter />
 
         <h3 className="mt-12 text-2xl text-gray-800 font-semibold">
@@ -84,6 +96,19 @@ const index = () => {
       </main>
     </>
   )
+}
+
+export const getServerSideProps = async ({ req }) => {
+
+
+  const { token } = parseCookie(req)
+  const user = token ? jwtVerify(token) : {}
+
+  return {
+    props: {
+      user
+    }
+  }
 }
 
 export default index
