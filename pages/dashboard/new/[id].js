@@ -31,7 +31,8 @@ const index = ({ user, id }) => {
         country: "",
         city: "",
         details: "",
-        authorId: id
+        authorId: id,
+        locale
     })
 
     const [errors, setErrors] = useState({
@@ -40,7 +41,7 @@ const index = ({ user, id }) => {
         email: "",
         aid: "",
         country: "",
-        details: ""
+        details: "",
     })
 
     const aids = filter[locale].aids

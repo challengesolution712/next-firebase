@@ -20,7 +20,10 @@ export default async function handler(req, res) {
         updateDoc(docRef, {
             ...data
         }).then(() => {
-            res.json({ updated: true, msg: "Your post updated successfuly" })
+            res.json({ updated: true, msg: {
+                ar: "تم تحديث المنشور بنجاح",
+                en: "Your post updated successfuly"
+            } })
         })
         
         

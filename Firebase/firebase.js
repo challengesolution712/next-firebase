@@ -5,7 +5,9 @@ import {
 } from "firebase/auth";
 import {
     getFirestore,
+    orderBy,
     query,
+    startAt,
     getDocs,
     collection,
     doc,
@@ -15,7 +17,7 @@ import {
     addDoc,
     updateDoc,
     onSnapshot,
-    deleteDoc
+    deleteDoc,
 } from "firebase/firestore";
 
 const app = !getApps().length ? initializeApp(config) : getApp()
@@ -33,6 +35,8 @@ export {
     collection,
     query,
     where,
+    orderBy,
+    startAt,
     updateDoc,
     onSnapshot,
     deleteDoc

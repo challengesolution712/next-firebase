@@ -32,7 +32,8 @@ const index = ({ user, id }) => {
         country: "",
         city: "",
         details: "",
-        authorId: ""
+        authorId: "",
+        locale
     })
 
     const [errors, setErrors] = useState({
@@ -108,13 +109,13 @@ const index = ({ user, id }) => {
 
             setIsLoad(true)
 
-            const data = {...state}
+            const data = {...state, locale}
             
             axios.post(`/api/edit/${id}/?post=${router.query.post}`, { data }).then(res => {
                 const { updated, msg } = res.data
                 if (updated) {
                     setIsLoad(false)
-                    setInfoMsg(msg)
+                    setInfoMsg(msg[locale])
                     document.getElementById('info-alert')
                     .scrollIntoView({behavior: 'smooth'})
                 }
@@ -133,7 +134,8 @@ const index = ({ user, id }) => {
                     setDataLoad(false)
                     // const { title, phone, email, aid, country, city, details } = doc
                     setState({
-                        ...post
+                        ...post,
+                        locale
                     })
 
                     const selectedIdx = countries.indexOf(post.country)

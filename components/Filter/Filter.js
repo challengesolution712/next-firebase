@@ -77,6 +77,9 @@ export default () => {
 
     return (
         <div className="py-4 max-w-xl mx-auto mt-12">
+            <h3 className="py-4 text-xl font-medium">
+                { filterLang.title }
+            </h3>
             <form
                 className="gap-5 sm:flex"
                 onSubmit={(e) => e.preventDefault()}

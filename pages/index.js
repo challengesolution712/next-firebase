@@ -59,9 +59,9 @@ export default function Home({ posts }) {
 }
 
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async ({ locale }) => {
 
-  const { data } = await axios.get(`${url}/api/posts`)
+  const { data } = await axios.post(`${url}/api/posts`, { locale })
 
   return {
     props: {

@@ -1,5 +1,6 @@
 export default {
     ar: {
+        title: 'فلترة المنشورات',
         label1: 'الدولة',
         label2: 'نوع المساعدة',
         label3: 'المدينة',
@@ -10,6 +11,7 @@ export default {
         reset: 'مسح البحث'
     },
     en: {
+        title: 'Filters',
         label1: 'Country',
         label2: 'Type of aid',
         label3: 'City',
